@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400');
+
+.main {
+  padding-top: 30px;
+  font-family: 'Roboto Slab', serif;
+  font-weight: 300;
+  color: #ededed;
+  margin-bottom: 40px;
+  height: 100%;
+}
+
+.title {
+  font-size: 45px;
+  margin-bottom: 40px;
+  margin-left: 15px;
+}
+
+.aboutme {
+  font-size: 22px;
+  line-height: 1.7em;
+}
+
+.stupid-face img {
+  max-width: 100%;
+}
+
+a {
+  /* color: white;
+  text-decoration: underline; */
+}
+a:hover {
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 1000px) {
+  .aboutme {
+    width: 100%;
+  }
+  div.col-md-6,
+  div.col-lg-6 {
+    min-width: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 770px) {
+}
+
+@media only screen and (max-width: 580px) {
+  /*   .aboutme {
+    width: 100%;
+  } */
+  /* div.col-md-6,
+  div.col-lg-6 {
+    min-width: 100% !important;
+  } */
+
+  .title {
+    margin-left: 15px;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .title {
+    margin-left: 15px;
+    font-size: 45px;
+  }
+
+  .aboutme {
+    font-size: 18px;
+    line-height: 1.5em;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+}
+
+@media only screen and (max-width: 350px) {
+  .title {
+    font-size: 35px;
+  }
+}

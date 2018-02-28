@@ -1,0 +1,74 @@
+<mat-card>
+  <form [formGroup]="form">
+    <mat-input-container class="mright">
+      <input type="text" id="clientName" formControlName="clientName" required matInput placeholder="Client Name">
+    </mat-input-container>
+    <mat-input-container>
+      <input type="text" id="shortName" formControlName="shortName" required matInput placeholder="Short Name">
+    </mat-input-container>
+    <mat-input-container class="mright">
+      <input type="text" id="contact" formControlName="contact" required matInput placeholder="Contact">
+    </mat-input-container>
+    <mat-input-container>
+      <input type="text" id="email" formControlName="email" required matInput placeholder="Email">
+    </mat-input-container>
+    <mat-input-container class="mright">
+      <input type="text" id="phone" formControlName="phone" required matInput placeholder="Phone">
+    </mat-input-container>
+    <mat-input-container>
+      <input type="text" id="website" formControlName="website" required matInput placeholder="Website">
+    </mat-input-container>
+    <mat-input-container class="mright">
+      <input type="text" id="address1" formControlName="address1" required matInput placeholder="Address">
+    </mat-input-container>
+    <mat-input-container>
+      <input type="text" id="address2" formControlName="address2" matInput placeholder="Unit/Apt #">
+    </mat-input-container>
+    <mat-input-container class="mright">
+      <input type="text" id="city" formControlName="city" required matInput placeholder="City">
+    </mat-input-container>
+    <mat-input-container>
+      <input type="text" id="state" formControlName="state" required matInput placeholder="State">
+    </mat-input-container>
+    <mat-input-container class="mright">
+      <input type="text" id="postalCode" formControlName="postalCode" required matInput placeholder="Postal Code">
+    </mat-input-container>
+    <mat-input-container>
+      <input type="text" id="country" formControlName="country" required matInput placeholder="Country">
+    </mat-input-container>
+    <mat-input-container class="mright">
+      <input type="number" id="hourRate" formControlName="hourRate" required matInput placeholder="Hourly Rate">
+    </mat-input-container>
+    <mat-input-container>
+      <input type="number" id="halfHourRate" formControlName="halfHourRate" required matInput placeholder="Half Hour Rate">
+    </mat-input-container>
+    <section>
+      <mat-checkbox id="active" formControlName="active">
+        <span style="font-weight: normal;">Active</span>
+      </mat-checkbox>
+    </section>
+
+    <mat-card-actions align="right" class="mright">
+      <span>
+        <div class="client-form__actions">
+          <span class="save-warning" *ngIf="form.dirty && !form.valid && mouseHover">
+            Please fill in all required fields appropriately
+          </span>
+          <span (mouseenter)="mouseHover=true" (mouseleave)="mouseHover=false">
+            <button mat-raised-button type="button" class="formsubmit-btn" *ngIf="!exists" (click)="createClient(form)">
+              Create Client
+            </button>
+
+            <button mat-raised-button type="button" class="formsubmit-btn" *ngIf="exists" (click)="updateClient(form)">
+              Save Changes
+            </button>
+          </span>
+          <!-- <button mat-raised-button type="button" class="formdelete-btn" *ngIf="exists" (click)="removeClient(form)">
+            Delete Client
+          </button> -->
+          <button class="formcancel-btn" mat-raised-button (click)="cancelClient()">Cancel</button>
+        </div>
+      </span>
+    </mat-card-actions>
+  </form>
+</mat-card>

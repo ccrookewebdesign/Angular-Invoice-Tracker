@@ -1,0 +1,63 @@
+<div class="container main" [@routerTransition]>
+  <div class="row">
+    <div class="title" [ngClass]="animateOnRouteEnter">I am Chris.</div>
+    <div class="title-img" [ngClass]="animateOnRouteEnter">
+      <img class="smallface" src="/assets/img/my-stupid-face.png">
+    </div>
+  </div>
+
+  <div class="row" [ngClass]="animateOnRouteEnter">
+    <div class="aboutme col-md-6 col-lg-6">
+      <p [ngClass]="animateOnRouteEnter">
+        My name is Chris and I am a web developer in Maui. I’ve been developing sites for nearly twenty years. Everything from little
+        WordPress sites to big, monster database-driven applications.
+      </p>
+      <p [ngClass]="animateOnRouteEnter">
+        I'm always interested in working on new and exciting projects.
+        <a href="mailto:ccrookewebdesign@gmail.com">Feel free to contact me!</a>
+      </p>
+      <p class="angular" [ngClass]="animateOnRouteEnter">
+        <a routerLink="invoicetracker/">
+          <img src="/assets/img/angular-text-logo.png">
+        </a>
+        <br>
+        <a class="invoicetracker" routerLink="invoicetracker/">Checkout my Angular Invoice Tracker app!</a>
+      </p>
+    </div>
+    <div [ngClass]="animateOnRouteEnter" class="stupid-face col-md-6 col-lg-6">
+      <img src="/assets/img/my-stupid-face.png">
+    </div>
+  </div>
+  <div class="row footer">
+    <div class="col-md-12 col-lg-12">
+      <a [ngClass]="animateOnRouteEnter" class="footerlink" href="https://twitter.com/chris_crooke" target="_blank">
+        <img class="footer-icon" src="/assets/img/twitter-icon.png">
+        <span class="footer-link">
+          twitter
+        </span>
+      </a>
+      <a [ngClass]="animateOnRouteEnter" class="footerlink" href="https://github.com/ccrookewebdesign" target="_blank">
+        <img class="footer-icon" src="/assets/img/github-icon.png">
+        <span class="footer-link">
+          github
+        </span>
+      </a>
+      <div class="tiny">&nbsp;</div>
+      <a [ngClass]="animateOnRouteEnter" class="footerlink" href="mailto:ccrookewebdesign@gmail.com" target="_blank">
+        <img class="footer-icon" src="/assets/img/email-icon.png">
+        <span class="footer-link">
+          email
+        </span>
+      </a>
+      <a [ngClass]="animateOnRouteEnter" class="footerlink" href="/chris-crooke-resume.pdf" target="_blank">
+        <img class="footer-icon" src="/assets/img/resume-icon.png">
+        <span class="footer-link">
+          resume
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="copyright">&copy; {{thisYear}} Chris Crooke</div>
+  </div>

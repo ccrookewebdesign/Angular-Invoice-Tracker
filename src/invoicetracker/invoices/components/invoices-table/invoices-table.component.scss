@@ -1,0 +1,46 @@
+.invoicestable {
+  font-size: 14px;
+  width: 100% !important;
+}
+
+.invoicestable tr {
+  border-top: 1px solid #44617d !important;
+}
+
+.invoicestable tr:hover {
+  background-color: #466380 !important;
+}
+
+.invoicestable thead tr:hover,
+.invoicestable tr.nohover:hover,
+.invoicestable tr.headerrow {
+  background-color: transparent !important;
+}
+
+.invoicestable tr:hover td {
+  background-color: transparent; /* or #000 */
+}
+
+.invoicestable tr:first-of-type {
+  border-top: none !important;
+  border-bottom: 1px solid #44617d !important;
+}
+
+.invoicestable td {
+  padding: 8px 25px 8px 0 !important;
+  vertical-align: top;
+}
+
+.invoicestable tr.headerrow {
+  color: #9aaaba;
+  font-weight: bold;
+}
+
+td.right,
+th.right {
+  text-align: right !important;
+}
+
+.invoicestable td.pl15 {
+  padding-left: 15px !important;
+}

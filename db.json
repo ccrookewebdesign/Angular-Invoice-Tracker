@@ -1,0 +1,218 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "active": true,
+      "address1": "2 Whispering Woods Drive",
+      "address2": "",
+      "city": "Murfreesboro",
+      "clientName": "Peanut Pockets SteakhouseX",
+      "contact": "Billy",
+      "country": "United States",
+      "createDate": "December 1, 2017 at 2:00:00 AM UTC-8",
+      "email": "billy@ccrooke.com",
+      "halfHourRate": 76,
+      "hourRate": 120,
+      "phone": "321.123.4322",
+      "postalCode": "20904",
+      "shortName": "PeanutPockets",
+      "state": "Tennessee",
+      "website": "www.peanutpockets.com"
+    },
+    {
+      "id": 2,
+      "active": true,
+      "address1": "6 Maple Lane",
+      "address2": "Unit 33",
+      "city": "Murfreesboro",
+      "clientName": "The Cobbler Gobbler",
+      "contact": "Dunlap",
+      "country": "United States",
+      "createDate": "December 2, 2017 at 2:00:00 AM UTC-8",
+      "email": "dunlap@ccrooke.com",
+      "halfHourRate": 60,
+      "hourRate": 110,
+      "phone": "123.123.1231",
+      "postalCode": "23421",
+      "shortName": "Cobbler",
+      "state": "Tennessee",
+      "website": "www.gobbler.com"
+    },
+    {
+      "clientName": "Boom Daddy",
+      "id": 3
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "clientId": 1,
+      "createDate": "January 9, 2018 at 9:58:05 AM UTC-8",
+      "fixedRate": false,
+      "halfHourRate": 55,
+      "hourRate": 100,
+      "hours": 2,
+      "taskDate": "January 9, 2018 at 9:57:26 AM UTC-8",
+      "taskDescription": "New admin module for processing new email accounts",
+      "total": 100
+    },
+    {
+      "id": 2,
+      "clientId": 1,
+      "createDate": "January 10, 2018 at 9:58:05 AM UTC-8",
+      "fixedRate": false,
+      "halfHourRate": 55,
+      "hourRate": 100,
+      "hours": 2,
+      "taskDate": "January 10, 2018 at 9:57:26 AM UTC-8",
+      "taskDescription": "Updated home page",
+      "total": 100
+    },
+    {
+      "id": 3,
+      "clientId": 2,
+      "createDate": "January 12, 2018 at 9:58:05 AM UTC-8",
+      "fixedRate": false,
+      "halfHourRate": 55,
+      "hourRate": 100,
+      "hours": 1,
+      "taskDate": "January 12, 2018 at 9:57:26 AM UTC-8",
+      "taskDescription": "New social media post",
+      "total": 100
+    }
+  ],
+  "toppings": [
+    {
+      "id": 1,
+      "name": "anchovy"
+    },
+    {
+      "id": 2,
+      "name": "bacon"
+    },
+    {
+      "id": 3,
+      "name": "basil"
+    },
+    {
+      "id": 4,
+      "name": "chili"
+    },
+    {
+      "id": 5,
+      "name": "mozzarella"
+    },
+    {
+      "id": 6,
+      "name": "mushroom"
+    },
+    {
+      "id": 7,
+      "name": "olive"
+    },
+    {
+      "id": 8,
+      "name": "onion"
+    },
+    {
+      "id": 9,
+      "name": "pepper"
+    },
+    {
+      "id": 10,
+      "name": "pepperoni"
+    },
+    {
+      "id": 11,
+      "name": "sweetcorn"
+    },
+    {
+      "id": 12,
+      "name": "tomato"
+    }
+  ],
+  "pizzas": [
+    {
+      "name": "XXBlazin' Inferno",
+      "toppings": [
+        {
+          "id": 10,
+          "name": "pepperoni"
+        },
+        {
+          "id": 9,
+          "name": "pepper"
+        },
+        {
+          "id": 3,
+          "name": "basil"
+        },
+        {
+          "id": 4,
+          "name": "chili"
+        },
+        {
+          "id": 7,
+          "name": "olive"
+        },
+        {
+          "id": 2,
+          "name": "bacon"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "name": "Seaside Surfin'",
+      "toppings": [
+        {
+          "id": 6,
+          "name": "mushroom"
+        },
+        {
+          "id": 7,
+          "name": "olive"
+        },
+        {
+          "id": 2,
+          "name": "bacon"
+        },
+        {
+          "id": 3,
+          "name": "basil"
+        },
+        {
+          "id": 1,
+          "name": "anchovy"
+        },
+        {
+          "id": 8,
+          "name": "onion"
+        },
+        {
+          "id": 11,
+          "name": "sweetcorn"
+        },
+        {
+          "id": 9,
+          "name": "pepper"
+        },
+        {
+          "id": 5,
+          "name": "mozzarella"
+        }
+      ],
+      "id": 2
+    },
+    {
+      "name": "Plain Ol' Pepperoni",
+      "toppings": [
+        {
+          "id": 10,
+          "name": "pepperoni"
+        }
+      ],
+      "id": 3
+    }
+  ]
+}

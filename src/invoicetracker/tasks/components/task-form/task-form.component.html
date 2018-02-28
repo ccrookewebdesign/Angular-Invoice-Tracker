@@ -1,0 +1,85 @@
+<mat-card>
+  <form [formGroup]="form">
+    <mat-form-field class="dateInput">
+      <input readonly matInput formControlName="taskDate" [matDatepicker]="picker" placeholder="">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-input-container class="fullwidth">
+      <textarea id="taskDescription" formControlName="taskDescription" required matInput placeholder="Task Description"></textarea>
+    </mat-input-container>
+    <mat-form-field class="fullwidth">
+
+      <mat-select (change)="clientSelect()" placeholder="Client" formControlName="clientId" id="clientId" name="clientId">
+        <mat-option *ngFor="let client of clients" [value]="client.id">
+          {{client.clientName}}
+        </mat-option>
+      </mat-select>
+
+
+      <!-- <mat-select (change)="clientSelect()" [placeholder]="clientPlaceholder" formControlName="selectedClient" id="selectedClient"
+        name="selectedClient">
+        <mat-option *ngIf="isNewTask && selectClient" [value]="selectClient">{{selectClient.clientName}}</mat-option>
+        <mat-option *ngIf="!isNewTask" [value]="taskForm.value.selectedClient">{{taskForm.value.selectedClient.clientName}}</mat-option>
+        <mat-option *ngFor="let client of clients | async" [value]="client">{{client.clientName}}</mat-option>
+      </mat-select>
+      <ng-template #loading>Loading&hellip;</ng-template> -->
+    </mat-form-field>
+
+    <mat-input-container>
+      <input (blur)="updateRates()" type="number" id="hourRate" formControlName="hourRate" required matInput placeholder="Hourly Rate">
+    </mat-input-container>
+
+    <mat-input-container>
+      <input (blur)="updateRates()" type="number" id="halfHourRate" formControlName="halfHourRate" required matInput placeholder="Half Hour Rate">
+    </mat-input-container>
+
+    <section style="margin-bottom: 10px;">
+      <mat-checkbox disabled (click)="setFixedRate()" id="fixedRate" formControlName="fixedRate">
+        <span style="font-weight: normal;">Fixed Rate</span>
+      </mat-checkbox>
+    </section>
+
+    <mat-input-container>
+      <input (blur)="updateRates()" type="number" id="hours" formControlName="hours" required matInput placeholder="Hours">
+    </mat-input-container>
+
+    <mat-input-container>
+      <input type="number" id="total" formControlName="total" required matInput placeholder="total">
+    </mat-input-container>
+
+    <mat-card-actions align="right" class="mright">
+      <span>
+        <div class="client-form__actions">
+          <span class="save-warning" *ngIf="form.dirty && !form.valid && mouseHover">
+            Please fill in all required fields appropriately
+          </span>
+          <span (mouseenter)="mouseHover=true" (mouseleave)="mouseHover=false">
+            <button mat-raised-button type="button" class="formsubmit-btn" *ngIf="!exists" (click)="createTask(form)">
+              Create Task
+            </button>
+
+            <button mat-raised-button type="button" class="formsubmit-btn" *ngIf="exists" (click)="updateTask(form)">
+              Save Changes
+            </button>
+          </span>
+          <!-- <button mat-raised-button type="button" class="formdelete-btn" *ngIf="exists" (click)="removeClient(form)">
+            Delete Client
+          </button> -->
+          <button class="formcancel-btn" mat-raised-button (click)="cancelTask()">Cancel</button>
+        </div>
+      </span>
+    </mat-card-actions>
+
+    <!-- <mat-card-actions align="right">
+      <span class="save-warning" *ngIf="form.dirty && !form.valid && mouseHover">
+        Please fill in all required fields appropriately
+      </span>
+      <span (mouseenter)="mouseHover=true" (mouseleave)="mouseHover=false">
+        <button class="formsubmit-btn" [disabled]='!taskForm.valid' type="submit" mat-raised-button>SAVE</button>
+      </span>
+      <button class="formcancel-btn" mat-raised-button (click)="cancel()">CANCEL</button>
+    </mat-card-actions> -->
+  </form>
+</mat-card>

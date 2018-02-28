@@ -1,0 +1,75 @@
+<div class="body" [@routerTransition]>
+  <mat-toolbar color="accent">
+    <div class="nav-buttons">
+      <div class="row navcontainer">
+        <div class="col-md-4 col-lg-4">
+          <a mat-button [routerLink]="['']">Back to Main Site</a>
+        </div>
+        <div *ngIf="user$ | async as user" class="col-md-8 col-lg-8 right">
+          <span *ngIf="user.uid">
+            <a mat-button [routerLink]="['dashboard']">Dashboard</a>
+            <div class="dropdown">
+              <a class="dropbtn" mat-button [routerLink]="['clients']">Clients</a>
+              <div class="dropdown-content">
+                <a [routerLink]="['clients/', 'new']">Add New Client</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <a class="dropbtn" mat-button [routerLink]="['tasks']">Tasks</a>
+              <div class="dropdown-content">
+                <a [routerLink]="['tasks/', 'new']">Add New Task</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <a class="dropbtn" mat-button [routerLink]="['invoices']">Invoices</a>
+              <div class="dropdown-content">
+                <a [routerLink]="['invoices/', 'new']">Add New Invoice</a>
+              </div>
+            </div>
+            <a class="login" mat-button (click)="logout()">Logout</a>
+          </span>
+          <a *ngIf="!user.uid" class="login" mat-button (click)="googleLogin()">Login</a>
+        </div>
+      </div>
+    </div>
+  </mat-toolbar>
+  <div class="container" class="routercontainer" [@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path">
+    <router-outlet #o="outlet"></router-outlet>
+  </div>
+  <div class="row footer">
+    <div class="col-md-12 col-lg-12">
+      <a [ngClass]="animateOnRouteEnter" class="footerlink" href="https://twitter.com/chris_crooke" target="_blank">
+        <img class="footer-icon" src="/assets/img/twitter-icon.png">
+        <span class="footer-link">
+          twitter
+        </span>
+      </a>
+      <a [ngClass]="animateOnRouteEnter" class="footerlink" href="https://github.com/ccrookewebdesign" target="_blank">
+        <img class="footer-icon" src="/assets/img/github-icon.png">
+        <span class="footer-link">
+          github
+        </span>
+      </a>
+      <div class="tiny">&nbsp;</div>
+      <a [ngClass]="animateOnRouteEnter" class="footerlink" href="mailto:ccrookewebdesign@gmail.com" target="_blank">
+        <img class="footer-icon" src="/assets/img/email-icon.png">
+        <span class="footer-link">
+          email
+        </span>
+      </a>
+      <a [ngClass]="animateOnRouteEnter" class="footerlink" href="/chris-crooke-resume.pdf" target="_blank">
+        <img class="footer-icon" src="/assets/img/resume-icon.png">
+        <span class="footer-link">
+          resume
+        </span>
+      </a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="copyright">
+      <span>&copy; {{thisYear}} Chris Crooke</span>
+      <a style="color: #35485e;" [routerLink]="['/invoicetracker/test']">test</a>
+    </div>
+  </div>
+</div>

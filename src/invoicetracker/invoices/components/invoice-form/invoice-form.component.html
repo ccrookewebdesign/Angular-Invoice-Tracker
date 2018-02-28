@@ -1,0 +1,68 @@
+<mat-card>
+  <form [formGroup]="form">
+    <mat-input-container class="fullwidth">
+      <input type="text" id="title" formControlName="title" required matInput placeholder="Title">
+    </mat-input-container>
+    <mat-form-field class="fullwidth">
+      <mat-select placeholder="Client*" formControlName="clientId" id="clientId" name="clientId">
+        <mat-option *ngFor="let client of clients" [value]="client.id">
+          {{client.clientName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-input-container>
+      <input type="number" id="invoiceTotal" formControlName="invoiceTotal" required matInput placeholder="Total">
+    </mat-input-container>
+    <mat-form-field class="dateInput">
+      <input readonly matInput formControlName="dueDate" [matDatepicker]="picker" placeholder="Date Due*">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="dateInput">
+      <input readonly matInput formControlName="sentDate" [matDatepicker]="picker2" placeholder="Date Sent">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="dateInput">
+      <input readonly matInput formControlName="paidDate" [matDatepicker]="picker3" placeholder="Date Paid">
+      <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+      <mat-datepicker #picker3></mat-datepicker>
+    </mat-form-field>
+
+    <section class="mat-check" style="margin-bottom: 15px;">
+      <mat-checkbox style="border-bottom: none!important" id="invoicePaid" formControlName="invoicePaid">
+        <span style="font-weight: normal;">Invoice Paid</span>
+      </mat-checkbox>
+    </section>
+
+    <mat-input-container class="fullwidth">
+      <textarea id="notes" formControlName="notes" required matInput placeholder="Invoice Notes"></textarea>
+    </mat-input-container>
+
+
+    <mat-card-actions align="right" class="mright">
+      <span>
+        <div class="client-form__actions">
+          <span class="save-warning" *ngIf="form.dirty && !form.valid && mouseHover">
+            Please fill in all required fields appropriately
+          </span>
+          <span (mouseenter)="mouseHover=true" (mouseleave)="mouseHover=false">
+            <button mat-raised-button type="button" class="formsubmit-btn" *ngIf="!exists" (click)="createInvoice(form)">
+              Create Invoice
+            </button>
+
+            <button mat-raised-button type="button" class="formsubmit-btn" *ngIf="exists" (click)="updateInvoice(form)">
+              Save Changes
+            </button>
+          </span>
+          <!-- <button mat-raised-button type="button" class="formdelete-btn" *ngIf="exists" (click)="removeInvoice(form)">
+            Delete Invoice
+          </button> -->
+          <button class="formcancel-btn" mat-raised-button (click)="cancelInvoice()">Cancel</button>
+        </div>
+      </span>
+    </mat-card-actions>
+  </form>
+</mat-card>

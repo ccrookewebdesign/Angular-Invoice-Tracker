@@ -1,0 +1,145 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+.nav-buttons {
+  width: 100%;
+}
+
+.navcontainer {
+  margin-bottom: 10px;
+  padding-top: 8px;
+}
+
+.routercontainer {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  width: 100%px !important;
+}
+
+.strong {
+  font-weight: bold;
+}
+.no-bold {
+  font-weight: normal;
+}
+.em {
+  font-style: italic;
+}
+
+.right {
+  text-align: right;
+}
+
+.fs12 {
+  font-size: 12px;
+}
+.fs13 {
+  font-size: 13px;
+}
+
+.pt25 {
+  padding-top: 25px;
+}
+.pb25 {
+  padding-bottom: 25px;
+}
+
+.mousepointer {
+  cursor: pointer;
+}
+
+.save-warning {
+  color: #990000;
+  font-style: italic;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.footer {
+  margin: 50px auto 25px;
+  text-align: center;
+}
+
+a.footerlink {
+  color: #ededed;
+  opacity: 0.5;
+}
+
+a.footerlink:hover {
+  color: #ededed !important;
+  text-decoration: none;
+}
+
+span.footer-link {
+  line-height: 39px;
+  padding-left: 6px;
+  padding-right: 30px;
+}
+
+div.tiny {
+  display: none;
+}
+
+.copyright {
+  font-size: 0.8em;
+  color: #9aaaba;
+  width: 100%;
+  text-align: center !important;
+  margin-bottom: 10px;
+}
+.copyright span {
+  opacity: 0.5;
+}
+.copyright a:hover {
+  color: #35485e !important;
+  text-decoration: none;
+}
+@media only screen and (max-width: 770px) {
+  .col-md-8,
+  .col-lg-8 {
+    max-width: 75% !important;
+    padding-left: 4px;
+  }
+  .col-md-4,
+  .col-lg-4 {
+    max-width: 20% !important;
+    padding-right: 4px;
+  }
+
+  img.footer-icon {
+    max-width: 25px;
+  }
+
+  span.footer-link {
+    font-size: 11px;
+    //padding-right: 5px;
+  }
+}
+
+@media only screen and (max-width: 470px) {
+  .footer {
+    margin: 40px auto 25px;
+  }
+
+  span.footer-link {
+    //font-size: 11px;
+    padding-right: 5px;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  div.tiny {
+    display: block;
+  }
+
+  span.footer-link {
+    //font-size: 11px;
+    padding-right: 15px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+}

@@ -1,0 +1,46 @@
+.taskstable {
+  font-size: 14px;
+  width: 100% !important;
+}
+
+.taskstable tr {
+  border-top: 1px solid #44617d !important;
+}
+
+.taskstable tr:hover {
+  background-color: #466380 !important;
+}
+
+.taskstable thead tr:hover,
+.taskstable tr.nohover:hover,
+.taskstable tr.headerrow {
+  background-color: transparent !important;
+}
+
+.taskstable tr:hover td {
+  background-color: transparent; /* or #000 */
+}
+
+.taskstable tr:first-of-type {
+  border-top: none !important;
+  border-bottom: 1px solid #44617d !important;
+}
+
+.taskstable td {
+  padding: 8px 25px 8px 0 !important;
+  vertical-align: top;
+}
+
+.taskstable tr.headerrow {
+  color: #9aaaba;
+  font-weight: bold;
+}
+
+td.right,
+th.right {
+  text-align: right !important;
+}
+
+.taskstable td.pl15 {
+  padding-left: 15px !important;
+}
