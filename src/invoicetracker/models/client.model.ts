@@ -1,3 +1,4 @@
+import { Invoice } from './invoice.model';
 /* export interface Client {
   id?: string;
   clientName?: string;
@@ -21,4 +22,5 @@ export interface Client {
   active: boolean;
   address2?: string;
   id?: string;
+  invoices?: Invoice[];
 }

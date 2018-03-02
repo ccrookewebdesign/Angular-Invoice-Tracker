@@ -67,6 +67,6 @@ export class TasksTableComponent {
   calcTotal(hours: number, total: number) {
     this.sumHours += +hours;
     this.sumTotal += +total;
-    console.log(this.sumTotal);
+    //console.log(this.sumTotal);
   }
 }

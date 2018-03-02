@@ -8,6 +8,8 @@ import * as fromStore from '../../../store';
 
 import * as firebase from 'firebase';
 
+import * as fromInvoiceService from '../../../services';
+
 import { Invoice } from '../../../models/invoice.model';
 import { Client } from '../../../models/client.model';
 
@@ -43,10 +45,14 @@ export class InvoiceDetailComponent implements OnInit {
   clients$: Observable<Client[]>;
   selectedClient$: Observable<Client>;
 
-  constructor(private store: Store<fromStore.InvoiceTrackerState>) {}
+  constructor(
+    private invoiceService: fromInvoiceService.InvoicesService,
+    private store: Store<fromStore.InvoiceTrackerState>
+  ) {}
 
   ngOnInit() {
     this.invoice$ = this.store.select(fromStore.getSelectedInvoice);
+    //this.invoice$ = this.invoiceService.getInvoice();
     this.clients$ = this.store.select(fromStore.getActiveClients);
     this.selectedClient$ = this.store.select(fromStore.getSelectedClient);
   }

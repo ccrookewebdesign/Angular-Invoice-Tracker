@@ -53,7 +53,11 @@ export const ROUTES: Routes = [
       },
       {
         path: 'clients',
-        canActivate: [fromGuards.AuthGuard, fromGuards.ClientsGuard],
+        canActivate: [
+          fromGuards.AuthGuard,
+          fromGuards.ClientsGuard,
+          fromGuards.InvoicesGuard
+        ],
         component: fromClientContainers.ClientsComponent
       },
       {
@@ -146,7 +150,7 @@ export const ROUTES: Routes = [
         component: fromInvoiceContainers.InvoiceDetailComponent
       },
       {
-        path: 'test',
+        path: 'test/:invoiceId',
         canActivate: [
           fromGuards.AuthGuard,
           fromGuards.ClientsGuard,

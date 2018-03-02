@@ -89,12 +89,12 @@ export class UserEffects {
     })
   );
 
-  @Effect()
+  /* @Effect()
   handleLoginSuccess = this.actions.ofType(userActions.AUTHENTICATED).pipe(
     map(arr => {
       return new fromRoot.Go({
         path: ['/invoicetracker/dashboard']
       });
     })
-  );
+  ); */
 }

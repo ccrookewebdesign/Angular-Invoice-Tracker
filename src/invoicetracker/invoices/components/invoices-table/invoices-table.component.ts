@@ -33,15 +33,14 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
       </td>
     </tr>
     <tr [ngClass]="animateOnRouteEnter" *ngFor="let invoice of invoices">
-      {{calcTotal(invoice.invoiceTotal)}}
       <td scope="row" class="pl15">
         <a [routerLink]="['/invoicetracker/invoices', invoice.id]">{{invoice.title}}</a>
       </td>
       <td *ngIf="clientId === null"><a [routerLink]="['/invoicetracker/clients', invoice.clientId]">{{invoice.client.clientName}}</a></td>
       <td class="right">{{invoice.dueDate | date: dateFormat}}</td>
       <td *ngIf="clientId === null" class="right">{{invoice.sentDate | date: dateFormat}}</td>
-      <td class="right">{{invoice.invoicePaid ? 'Yes' : 'No'}}</td>
-      <td class="right">{{invoice.invoiceTotal | number}}</td>
+      <td class="right"><span (click)="setPaid()">{{invoice.invoicePaid ? 'Yes' : 'No'}}</span></td>
+      <td class="right">{{calcTotal(invoice.invoiceTotal) | number}}</td>
       <td *ngIf="clientId === null && showLinks" class="right"><a [routerLink]="['/invoicetracker/invoices', invoice.id]">add/edit tasks</a></td>      
     </tr>
     <tr [ngClass]="animateOnRouteEnter" class="nohover" *ngIf="invoices.length !== 0">
@@ -60,7 +59,7 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
 })
 export class InvoicesTableComponent {
   animateOnRouteEnter = ANIMATE_ON_ROUTE_ENTER;
-  @Input() invoices: Invoices[];
+  @Input() invoices: Invoice[];
   @Input() clientId: string = null;
   @Input() fontSize: string = '14px';
   @Input() dateFormat: string = 'MM/dd/yyyy';
@@ -70,9 +69,15 @@ export class InvoicesTableComponent {
 
   calcTotal(total: number) {
     this.sumTotal += +total;
+    return total;
   }
 
-  setPaid(invoice: number) {
-    console.log(JSON.stringify(invoice));
+  /* calcTotal(invoices: Invoice[]) {
+    //this.sumTotal += +total;
+    console.log('here: ' + invoices);
+  } */
+
+  setPaid() {
+    console.log('123');
   }
 }

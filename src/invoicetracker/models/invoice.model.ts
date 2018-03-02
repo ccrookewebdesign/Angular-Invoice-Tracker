@@ -10,6 +10,8 @@ export interface Invoice {
   invoiceTotal: number;
   notes: string;
   paidDate: string;
+  client: object;
+  tasks?: Tasks[];
   id?: string;
 }
 
@@ -23,7 +25,7 @@ export interface Invoices {
   invoiceTotal: number;
   notes: string;
   paidDate: string;
-  invoiceTasks: Tasks[];
+  tasks: Tasks[];
   client: object;
   id?: string;
 }

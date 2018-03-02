@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { tap, map, filter, take, switchMap } from 'rxjs/operators';
 import * as fromStore from '../../../store';
 
+import * as fromClientService from '../../../services';
+
 import { Client } from '../../../models/client.model';
 
 import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transition';
@@ -45,11 +47,17 @@ export class ClientsComponent implements OnInit {
   showArchived$: Observable<boolean>;
   clients$: Observable<Client[]>;
 
-  constructor(private store: Store<fromStore.InvoiceTrackerState>) {}
+  constructor(
+    private store: Store<fromStore.InvoiceTrackerState>,
+    private clientService: fromClientService.ClientsService
+  ) {}
 
   ngOnInit() {
     //this.clients$ = this.store.select(fromStore.getActiveClients);
-    this.showArchived$ = this.store.select(fromStore.getShowArchived).pipe(
+    this.clients$ = this.clientService.getClientCollection();
+    this.showArchived$ = this.store.select(
+      fromStore.getShowArchived
+    ) /* .pipe(
       map(showArchived => {
         if (showArchived) {
           this.clients$ = this.store.select(fromStore.getAllClients);
@@ -59,7 +67,7 @@ export class ClientsComponent implements OnInit {
         //console.log(showArchived);
         return showArchived;
       })
-    );
+    ) */;
   }
 
   updateFilter(event: boolean) {

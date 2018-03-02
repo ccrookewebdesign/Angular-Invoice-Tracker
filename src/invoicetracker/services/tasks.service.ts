@@ -52,19 +52,31 @@ export class TasksService {
     return Observable.of<Task>(payload);
   }
 
-  /* getTaskTotals(): Observable<TasksCollection> {
-    let tasksCollection$: Observable<Tasks[]>;
-    tasksCollection$ = this.getTaskCollection()
-    .map(
-      arr => 
+  tasksCollection: TasksCollection = {
+    sumHours: 0,
+    sumTotal: 0,
+    tasks: []
+  };
 
-      arr.reduce((a, b) => a + b.hours, 0)
-    
-    )
-  } */
+  calcTask(task: any) {
+    this.tasksCollection.sumHours += +task.hours;
+    this.tasksCollection.sumTotal += +task.total;
+    this.tasksCollection.tasks.push(task);
+    /* console.log('sumHours: ' + this.tasksCollection.sumHours);
+    console.log('sumTotal: ' + this.tasksCollection.sumTotal);
+    console.log('tasks: ' + this.tasksCollection.tasks); */
+    //console.log('tasks: ' + JSON.stringify(this.tasks));
+    //return {tasks: this.tasksCollection.tasks, sumHours: this.tasksCollection.sumHours, sumTotal: this.tasksCollection.sumTotal,};
+    return task;
+  }
 
   getTaskCollection(): Observable<Tasks[]> {
+    this.tasksCollection.sumHours = 0;
+    this.tasksCollection.sumTotal = 0;
+    this.tasksCollection.tasks = [];
+
     let tasksCollection$: Observable<Tasks[]>;
+
     return (tasksCollection$ = Observable.combineLatest(
       this.store.select(fromStore.getAllTasks),
       this.store.select(fromStore.getAllClients),
@@ -87,26 +99,52 @@ export class TasksService {
             task =>
               task.clientId ===
               (selectedClient ? selectedClient.id : task.clientId)
-          );
+          )
+          .map(task => this.calcTask(task));
       }
     ));
   }
 
-  getClientTasks(): Observable<Tasks[]> {
-    let clientTasks$: Observable<Tasks[]>;
-    return (clientTasks$ = Observable.combineLatest(
-      this.store.select(fromStore.getClientTasks),
+  /* calcTaskTest(task: any) {
+    this.tasksCollection.sumHours += +task.hours;
+    this.tasksCollection.sumTotal += +task.total;
+    this.tasksCollection.tasks.push(task);
+    return task;
+  } */
+
+  /* getTaskCollectionTest(): Observable<TasksCollection> {
+    this.tasksCollection.sumHours = 0;
+    this.tasksCollection.sumTotal = 0;
+    this.tasksCollection.tasks = [];
+
+    let tasksCollection$: Observable<TasksCollection>;
+
+    (tasksCollection$ = Observable.combineLatest(
+      this.store.select(fromStore.getAllTasks),
+      this.store.select(fromStore.getAllClients),
       this.store.select(fromStore.getSelectedClient),
-      (tasks: any[], client: any) => {
-        return tasks.map(task => {
-          let taskClient: Client = client;
-          //return Object.assign({}, task, { client: taskClient });
-          return {
-            ...task,
-            client: taskClient
-          };
-        });
+      (tasks: any[], clients: any[], selectedClient: any) => {
+        return tasks
+          .map(task => {
+            let taskClient: Client = clients.find(
+              client => client.id === task.clientId
+            ) || {
+              client: {}
+            };
+
+            return {
+              ...task,
+              client: taskClient
+            };
+          })
+          .filter(
+            task =>
+              task.clientId ===
+              (selectedClient ? selectedClient.id : task.clientId)
+          )
+          .map(task => this.calcTaskTest(task));
       }
-    ));
-  }
+    ));  
+    
+  } */
 }

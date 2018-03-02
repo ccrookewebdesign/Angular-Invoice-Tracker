@@ -7,6 +7,7 @@ import * as fromStore from '../store';
 import { tap, filter, take, map, switchMap, catchError } from 'rxjs/operators';
 
 import * as userActions from '../store/actions/user.action';
+import * as clientActions from '../store/actions/clients.action';
 
 import {
   ANIMATE_ON_ROUTE_ENTER,
@@ -21,13 +22,18 @@ import {
 })
 export class WrapperComponent implements OnInit {
   user$: Observable<any>;
+  currentPage$: Observable<any>;
   thisYear = new Date().getFullYear();
 
-  constructor(private store: Store<fromStore.InvoiceTrackerState>) {}
+  constructor(
+    private router: Store<fromRoot.State>,
+    private store: Store<fromStore.InvoiceTrackerState>
+  ) {}
 
   ngOnInit() {
     this.user$ = this.store.select(fromStore.getUser);
     this.store.dispatch(new userActions.GetUser());
+    this.currentPage$ = this.router.select(fromRoot.getRouterState);
   }
 
   googleLogin() {
@@ -36,6 +42,7 @@ export class WrapperComponent implements OnInit {
 
   logout() {
     this.store.dispatch(new userActions.Logout());
+    this.store.dispatch(new clientActions.ToggleShowArchived(false));
     return new fromRoot.Go({
       path: ['']
     });

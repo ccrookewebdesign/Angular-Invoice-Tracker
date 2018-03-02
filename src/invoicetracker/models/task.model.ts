@@ -8,7 +8,7 @@ export interface Task {
   taskDate: string;
   taskDescription: string;
   total: number;
-  invoiceId?: string;
+  invoiceId: string;
   id?: string;
 }
 
@@ -23,7 +23,7 @@ export interface Tasks {
   taskDate: string;
   taskDescription: string;
   total: number;
-  invoiceId?: string;
+  invoiceId: string;
   id: string;
 }
 

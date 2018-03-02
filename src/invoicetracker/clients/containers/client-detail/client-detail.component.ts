@@ -81,8 +81,8 @@ export class ClientDetailComponent implements OnInit {
 
   ngOnInit() {
     this.client$ = this.store.select(fromStore.getSelectedClient);
-    this.clientInvoices$ = this.invoiceService.getClientInvoices();
-    this.clientTasks$ = this.taskService.getClientTasks();
+    this.clientInvoices$ = this.invoiceService.getInvoiceCollection();
+    this.clientTasks$ = this.taskService.getTaskCollection();
   }
 
   onCreate(event: Client) {

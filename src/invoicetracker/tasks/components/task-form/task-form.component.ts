@@ -18,6 +18,8 @@ import {
 
 import { map } from 'rxjs/operators';
 
+import * as firebase from 'firebase';
+
 import { Task } from '../../../models/task.model';
 import { Client } from '../../../models/client.model';
 
@@ -29,7 +31,7 @@ import { Client } from '../../../models/client.model';
 })
 export class TaskFormComponent implements OnChanges, OnInit {
   exists = false;
-
+  defaultDate = firebase.firestore.FieldValue.serverTimestamp();
   mouseHover: boolean = false;
 
   @Input() task: Task;
@@ -48,9 +50,10 @@ export class TaskFormComponent implements OnChanges, OnInit {
     hourRate: [100, Validators.required],
     halfHourRate: [55, Validators.required],
     hours: [0, Validators.required],
-    taskDate: ['', [Validators.required]], //, Validators.pattern('^(?:(?:10|12|0?[13578])/(?:3[01]|[12][0-9]|0?[1-9])/(?:1[8-9]\\d{2}|[2-9]\\d{3})|(?:11|0?[469])/(?:30|[12][0-9]|0?[1-9])/(?:1[8-9]\\d{2}|[2-9]\\d{3})|0?2/(?:2[0-8]|1[0-9]|0?[1-9])/(?:1[8-9]\\d{2}|[2-9]\\d{3})|0?2/29/[2468][048]00|0?2/29/[3579][26]00|0?2/29/[1][89][0][48]|0?2/29/[2-9][0-9][0][48]|0?2/29/1[89][2468][048]|0?2/29/[2-9][0-9][2468][048]|0?2/29/1[89][13579][26]|0?2/29/[2-9][0-9][13579][26])$')]
+    taskDate: [new Date().toISOString(), [Validators.required]], //, Validators.pattern('^(?:(?:10|12|0?[13578])/(?:3[01]|[12][0-9]|0?[1-9])/(?:1[8-9]\\d{2}|[2-9]\\d{3})|(?:11|0?[469])/(?:30|[12][0-9]|0?[1-9])/(?:1[8-9]\\d{2}|[2-9]\\d{3})|0?2/(?:2[0-8]|1[0-9]|0?[1-9])/(?:1[8-9]\\d{2}|[2-9]\\d{3})|0?2/29/[2468][048]00|0?2/29/[3579][26]00|0?2/29/[1][89][0][48]|0?2/29/[2-9][0-9][0][48]|0?2/29/1[89][2468][048]|0?2/29/[2-9][0-9][2468][048]|0?2/29/1[89][13579][26]|0?2/29/[2-9][0-9][13579][26])$')]
     taskDescription: ['', [Validators.required, Validators.maxLength(200)]],
-    total: [0, Validators.required]
+    total: [0, Validators.required],
+    invoiceId: ['']
   });
 
   constructor(private fb: FormBuilder) {}
@@ -93,7 +96,7 @@ export class TaskFormComponent implements OnChanges, OnInit {
 
   updateTask(form: FormGroup) {
     const { value, valid, touched } = form;
-    if (touched && valid) {
+    if (/* touched && */ valid) {
       this.update.emit({ ...this.task, ...value });
     }
   }
@@ -119,7 +122,7 @@ export class TaskFormComponent implements OnChanges, OnInit {
   }
 
   updateRates() {
-    console.log('selectedClient: ' + this.selectedClient);
+    //console.log('selectedClient: ' + this.selectedClient);
     this.form.patchValue({
       total: this.calcCost(
         this.form.value.hourRate,
@@ -131,17 +134,11 @@ export class TaskFormComponent implements OnChanges, OnInit {
 
   setFixedRate() {
     if (this.form.value.fixedRate === true) {
-      console.log('equals true on enter: ' + this.form.value.fixedRate);
-
       this.form.patchValue({ fixedRate: false });
-      console.log('equals ? on 1st exit: ' + this.form.value.fixedRate);
     } else {
-      console.log('equals false on enter: ' + this.form.value.fixedRate);
       this.form.patchValue({ hours: 0 });
       this.form.patchValue({ fixedRate: true });
-      console.log('equals ? on 2nd exit: ' + this.form.value.fixedRate);
     }
-    //console.log('setFixedRate after: ' + this.form.value.fixedRate);
   }
 
   calcCost(hourRate: number, halfHourRate: number) {

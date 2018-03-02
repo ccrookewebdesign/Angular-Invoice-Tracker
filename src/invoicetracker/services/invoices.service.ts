@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/combineLatest';
-
+//import 'rxjs/add/operator/map'
 import * as fromStore from '../store';
 
 import {
@@ -54,13 +54,37 @@ export class InvoicesService {
     return Observable.of<Invoice>(payload);
   }
 
+  getInvoice(): Observable<Invoice> {
+    let invoice$: Observable<Invoice>;
+    return (invoice$ = Observable.combineLatest(
+      this.store.select(fromStore.getSelectedInvoice),
+      this.store.select(fromStore.getAllTasks),
+      (invoice: Invoice, tasks: any[]) => {
+        /* return invoice.map((task: Task) => {
+          let invoiceTasks: Tasks[] = tasks.filter(
+            task => task.invoiceId === invoice.id
+          );
+
+          return { ...invoice, tasks: invoiceTasks };
+        }); */
+
+        let invoiceTasks: Tasks[] = tasks.filter(
+          task => task.invoiceId === invoice.id
+        );
+
+        return { ...invoice, tasks: invoiceTasks };
+      }
+    ));
+  }
+
   getInvoiceCollection(): Observable<Invoices[]> {
     let invoicesCollection$: Observable<Invoices[]>;
     return (invoicesCollection$ = Observable.combineLatest(
       this.store.select(fromStore.getAllInvoices),
       this.store.select(fromStore.getAllClients),
       this.store.select(fromStore.getSelectedClient),
-      (invoices: any[], clients: any[], selectedClient: any) => {
+      this.store.select(fromStore.getAllTasks),
+      (invoices: any[], clients: any[], selectedClient: any, tasks: any[]) => {
         return invoices
           .map(invoice => {
             let invoiceClient: Client = clients.find(
@@ -68,8 +92,12 @@ export class InvoicesService {
             ) || {
               client: {}
             };
-            // return Object.assign({}, invoice, { client: invoiceClient });
-            return { ...invoice, client: invoiceClient };
+
+            let invoiceTasks: Tasks[] = tasks.filter(
+              task => task.invoiceId === invoice.id
+            );
+
+            return { ...invoice, client: invoiceClient, tasks: invoiceTasks };
           })
           .filter(
             invoice =>
@@ -80,7 +108,7 @@ export class InvoicesService {
     ));
   }
 
-  getClientInvoices(): Observable<Invoices[]> {
+  /* getClientInvoices(): Observable<Invoices[]> {
     let clientInvoices$: Observable<Invoices[]>;
     return (clientInvoices$ = Observable.combineLatest(
       this.store.select(fromStore.getClientInvoices),
@@ -93,5 +121,5 @@ export class InvoicesService {
         });
       }
     ));
-  }
+  } */
 }

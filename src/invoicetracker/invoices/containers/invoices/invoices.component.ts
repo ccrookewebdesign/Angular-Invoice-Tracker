@@ -21,6 +21,7 @@ import { Client } from '../../../models/client.model';
       <div *ngIf="!((invoices).length)">
           No invoices, add one to get started.
       </div>
+      <!-- <div>{{ invoices | json }}</div> -->
       <div class="col-md-12 col-lg-12 client-padding">
         <mat-card [ngClass]="animateOnRouteEnter">
           <invoices-table [invoices]="invoices"></invoices-table>

@@ -42,10 +42,6 @@ export const ROUTES: Routes = [
     component: HomeComponent
   },
   {
-    path: 'products',
-    loadChildren: '../products/products.module#ProductsModule'
-  },
-  {
     path: 'invoicetracker',
     loadChildren: '../invoicetracker/invoicetracker.module#InvoiceTrackerModule'
   }
