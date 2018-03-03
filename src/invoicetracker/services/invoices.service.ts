@@ -54,25 +54,19 @@ export class InvoicesService {
     return Observable.of<Invoice>(payload);
   }
 
-  getInvoice(): Observable<Invoice> {
-    let invoice$: Observable<Invoice>;
+  getInvoice(): Observable<any> {
+    let invoice$: Observable<any>;
     return (invoice$ = Observable.combineLatest(
       this.store.select(fromStore.getSelectedInvoice),
-      this.store.select(fromStore.getAllTasks),
-      (invoice: Invoice, tasks: any[]) => {
-        /* return invoice.map((task: Task) => {
-          let invoiceTasks: Tasks[] = tasks.filter(
-            task => task.invoiceId === invoice.id
-          );
+      this.getInvoiceCollection(),
+      (invoice: Invoice, invoices: Invoice[]) => {
+        return invoices.filter(inv => inv.id === invoice.id);
 
-          return { ...invoice, tasks: invoiceTasks };
-        }); */
-
-        let invoiceTasks: Tasks[] = tasks.filter(
+        /* let invoiceTasks: Tasks[] = tasks.filter(
           task => task.invoiceId === invoice.id
-        );
+        ); */
 
-        return { ...invoice, tasks: invoiceTasks };
+        //return { ...invoice, tasks: invoiceTasks };
       }
     ));
   }

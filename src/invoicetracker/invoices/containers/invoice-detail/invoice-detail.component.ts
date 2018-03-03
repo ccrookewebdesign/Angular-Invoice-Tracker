@@ -47,12 +47,14 @@ export class InvoiceDetailComponent implements OnInit {
 
   constructor(
     private invoiceService: fromInvoiceService.InvoicesService,
-    private store: Store<fromStore.InvoiceTrackerState>
+    private store: Store<fromStore.InvoiceTrackerState>,
+    private router: Store<fromRoot.State>
   ) {}
 
   ngOnInit() {
     this.invoice$ = this.store.select(fromStore.getSelectedInvoice);
     //this.invoice$ = this.invoiceService.getInvoice();
+
     this.clients$ = this.store.select(fromStore.getActiveClients);
     this.selectedClient$ = this.store.select(fromStore.getSelectedClient);
   }
