@@ -6,7 +6,7 @@ const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
 const jsonServer = require('json-server');
 
 const rules = [
-  { test: /\.html$/, loader: 'html-loader' },
+  { test: /\.html$/, loader: 'raw-loader' },
   { test: /\.scss$/, loaders: ['raw-loader', 'sass-loader'] },
   { test: /\.(jpe?g|png|gif|svg)$/i, loader: 'file-loader' }
 ];
@@ -47,6 +47,7 @@ if (process.env.NODE_ENV === 'production') {
       mangle: {
         screw_ie8: true
       },
+      //mangle: false,
       compress: {
         unused: true,
         dead_code: true,
@@ -98,10 +99,7 @@ module.exports = {
       warnings: false
     },
     publicPath: '/build/',
-    port: 3000,
-    setup: function(app) {
-      app.use('/api', jsonServer.router('db.json'));
-    }
+    port: 3000
   },
   devtool: 'sourcemap',
   entry: {

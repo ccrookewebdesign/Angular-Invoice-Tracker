@@ -58,7 +58,7 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
   `
 })
 export class InvoicesTableComponent {
-  animateOnRouteEnter = ANIMATE_ON_ROUTE_ENTER;
+  animateOnRouteEnter = 'route-enter-staggered';
   @Input() invoices: Invoice[];
   @Input() clientId: string = null;
   @Input() fontSize: string = '14px';

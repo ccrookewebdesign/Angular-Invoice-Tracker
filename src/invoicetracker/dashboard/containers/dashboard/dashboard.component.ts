@@ -17,7 +17,7 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
     <div class="container">
       <div class="row" style="margin-bottom: 10px;">
         <div class="col-md-12 col-lg-12"><h1>Dashboard</h1></div>
-        <div class="col-md-6 col-lg-6" *ngIf="invoicesCollection$ | async; let invoices; else loading">
+        <div class="col-md-6 col-lg-6" *ngIf="invoicesCollection$ | async; let invoices;">
           <mat-card [ngClass]="animateOnRouteEnter">
           <h4>Recent Invoices</h4>
           <div *ngIf="!invoices.length" class="norecords">
@@ -30,7 +30,7 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
           </div>
           </mat-card>
         </div>
-        <div class="col-md-6 col-lg-6" *ngIf="tasksCollection$ | async; let tasks; else loading">
+        <div class="col-md-6 col-lg-6" *ngIf="tasksCollection$ | async; let tasks;">
           <mat-card [ngClass]="animateOnRouteEnter">
           <h4>Recent Tasks</h4>
           <div *ngIf="!tasks.length" class="norecords">
@@ -48,7 +48,7 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
   `
 })
 export class DashboardComponent implements OnInit {
-  animateOnRouteEnter = ANIMATE_ON_ROUTE_ENTER;
+  animateOnRouteEnter = 'route-enter-staggered';
   invoicesCollection$: Observable<Invoices[]>;
   tasksCollection$: Observable<Tasks[]>;
 

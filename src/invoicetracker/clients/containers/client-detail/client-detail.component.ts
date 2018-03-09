@@ -35,8 +35,8 @@ import { Tasks } from '../../../models/task.model';
             (cancel)="onCancel($event)">
           </client-form>
         </div>
-        <div class="col-md-5 col-lg-5" *ngIf="client$ | async; let client; else loading">
-          <div class="row align-items-end" *ngIf="clientInvoices$ | async; let invoices; else loading">
+        <div class="col-md-5 col-lg-5" *ngIf="client$ | async; let client;">
+          <div class="row align-items-end" *ngIf="clientInvoices$ | async; let invoices;">
             <div class="col-md-12 col-lg-12 client-padding">
             <mat-card [ngClass]="animateOnRouteEnter">
               <h4>Recent Invoices</h4>
@@ -47,9 +47,8 @@ import { Tasks } from '../../../models/task.model';
             </mat-card>
             </div>    
           </div>
-          <ng-template #loading>Loading&hellip;</ng-template>
-        
-          <div class="row align-items-end" *ngIf="clientTasks$ | async; let tasks; else loading">
+                  
+          <div class="row align-items-end" *ngIf="clientTasks$ | async; let tasks;">
             <div class="col-md-12 col-lg-12 client-padding">
             <mat-card [ngClass]="animateOnRouteEnter">
               <h4>Recent Tasks</h4>
@@ -60,7 +59,6 @@ import { Tasks } from '../../../models/task.model';
             </mat-card>
             </div>    
           </div>
-          <ng-template #loading>Loading&hellip;</ng-template>          
         </div>
       </div>
     </div>

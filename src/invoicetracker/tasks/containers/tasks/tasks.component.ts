@@ -17,7 +17,7 @@ import { Client } from '../../../models/client.model';
       <div class="col-md-12 col-lg-12"><h1>Tasks</h1></div>
     </div>  
     
-    <div class="row align-items-end" *ngIf="tasksCollection$ | async; let tasks; else loading">
+    <div class="row align-items-end" *ngIf="tasksCollection$ | async; let tasks;">
       <div *ngIf="!((tasks).length)">
           No tasks, add one to get started.
       </div>
@@ -28,7 +28,6 @@ import { Client } from '../../../models/client.model';
         </mat-card>  
       </div>    
     </div>
-    <ng-template #loading>Loading&hellip;</ng-template>
   </div>  
   `
 })

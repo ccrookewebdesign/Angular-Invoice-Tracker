@@ -17,7 +17,7 @@ import { Client } from '../../../models/client.model';
       <div class="col-md-12 col-lg-12"><h1>Invoices</h1></div>
     </div>  
     
-    <div class="row align-items-end" *ngIf="invoicesCollection$ | async; let invoices; else loading">
+    <div class="row align-items-end" *ngIf="invoicesCollection$ | async; let invoices;">
       <div *ngIf="!((invoices).length)">
           No invoices, add one to get started.
       </div>
@@ -28,7 +28,6 @@ import { Client } from '../../../models/client.model';
         </mat-card>  
       </div>    
     </div>
-    <ng-template #loading>Loading&hellip;</ng-template>
   </div>  
   `
 })

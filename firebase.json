@@ -1,0 +1,33 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      ".firebaserc",
+      ".vscode",
+      ".git",
+      ".gitignore",
+      ".editorconfig",
+      "src/**/.*",
+      "db.json",
+      "package.json",
+      "README.md",
+      "tsconfig.json",
+      "webpack.config.js",
+      "yarn.lock",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

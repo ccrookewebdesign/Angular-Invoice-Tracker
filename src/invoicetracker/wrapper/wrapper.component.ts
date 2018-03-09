@@ -21,6 +21,7 @@ import {
   styleUrls: ['./wrapper.component.scss']
 })
 export class WrapperComponent implements OnInit {
+  animateOnRouteEnter = 'route-enter-staggered';
   user$: Observable<any>;
   currentPage$: Observable<any>;
   thisYear = new Date().getFullYear();

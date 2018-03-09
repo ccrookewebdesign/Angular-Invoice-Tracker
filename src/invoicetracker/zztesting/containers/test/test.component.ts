@@ -40,6 +40,8 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
   `
 })
 export class TestComponent implements OnInit {
+  animateOnRouteEnter = 'route-enter-staggered';
+
   invoice$: Observable<Invoice>;
   constructor(private invoiceService: fromInvoiceService.InvoicesService) {}
 

@@ -29,7 +29,7 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
           </div>  
         </div>
       </div>
-      <div class="row align-items-end" *ngIf="clients$ | async; let clients; else loading">
+      <div class="row align-items-end" *ngIf="clients$ | async; let clients;">
         <div *ngIf="!((clients).length)">
             No clients, add one to get started.
         </div>
@@ -38,12 +38,11 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
           <client-item [client]="client"></client-item>        
         </div>    
       </div>
-      <ng-template #loading>Loading&hellip;</ng-template>
     </div>  
   `
 })
 export class ClientsComponent implements OnInit {
-  animateOnRouteEnter = ANIMATE_ON_ROUTE_ENTER;
+  animateOnRouteEnter = 'route-enter-staggered';
   showArchived$: Observable<boolean>;
   clients$: Observable<Client[]>;
 
