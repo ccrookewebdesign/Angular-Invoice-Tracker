@@ -14,7 +14,7 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
 @Component({
   selector: 'invoices-table',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['invoices-table.component.scss'],
+  styleUrls: ['./invoices-table.component.scss'],
   template: `
     <table [ngStyle]="{'font-size': fontSize}" class="invoicestable" *ngIf="invoices; let invoices; else loading">
     <tr class="headerrow">

@@ -10,7 +10,7 @@ import { Client } from '../../../models/client.model';
 @Component({
   selector: 'invoices',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['invoices.component.scss'],
+  styleUrls: ['./invoices.component.scss'],
   template: `
   <div class="container">
     <div class="row" style="margin-bottom: 10px;">
@@ -34,7 +34,7 @@ import { Client } from '../../../models/client.model';
 export class InvoicesComponent implements OnInit {
   invoicesCollection$: Observable<Invoices[]>;
   //client$: Observable<Client>;
-
+  test = 10;
   constructor(private invoiceService: fromInvoiceService.InvoicesService) {}
 
   ngOnInit() {

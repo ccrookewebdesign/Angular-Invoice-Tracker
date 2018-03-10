@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'client-filter',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['client-filter.component.scss'],
+  styleUrls: ['./client-filter.component.scss'],
   template: `
     <mat-checkbox disabled [ngModel]="showArchived" #ctrl="ngModel" 
     name="showArchived" (click)="toggleShowArchived(!showArchived)">

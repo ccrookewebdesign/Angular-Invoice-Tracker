@@ -9,7 +9,7 @@ import {
 @Component({
   selector: 'client-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['client-item.component.scss'],
+  styleUrls: ['./client-item.component.scss'],
   template: `
     <mat-card style="height: 300px!important;">
       <mat-card-title>

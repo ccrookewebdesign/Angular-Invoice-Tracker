@@ -22,7 +22,7 @@ import { Client } from '../../../models/client.model';
 @Component({
   selector: 'client-form',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['client-form.component.scss'],
+  styleUrls: ['./client-form.component.scss'],
   templateUrl: './client-form.component.html'
 })
 export class ClientFormComponent implements OnChanges {

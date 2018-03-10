@@ -17,7 +17,7 @@ import { Tasks } from '../../../models/task.model';
 @Component({
   selector: 'client-detail',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['client-detail.component.scss'],
+  styleUrls: ['./client-detail.component.scss'],
   template: `
     <div class="container">
       <div class="row" style="margin-bottom: 10px;">

@@ -12,7 +12,7 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
 @Component({
   selector: 'dashboard',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['dashboard.component.scss'],
+  styleUrls: ['./dashboard.component.scss'],
   template: `
     <div class="container">
       <div class="row" style="margin-bottom: 10px;">

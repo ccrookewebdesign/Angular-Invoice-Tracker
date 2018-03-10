@@ -14,7 +14,7 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
 @Component({
   selector: 'clients',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['clients.component.scss'],
+  styleUrls: ['./clients.component.scss'],
   template: `
     <div class="container">
       <!--<div class="row" style="margin-bottom: 10px;">

@@ -24,7 +24,7 @@ import { Client } from '../../../models/client.model';
 @Component({
   selector: 'invoice-form',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['invoice-form.component.scss'],
+  styleUrls: ['./invoice-form.component.scss'],
   templateUrl: './invoice-form.component.html'
 })
 export class InvoiceFormComponent implements OnChanges, OnInit {

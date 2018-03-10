@@ -16,7 +16,7 @@ import { Client } from '../../../models/client.model';
 @Component({
   selector: 'invoice-detail',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['invoice-detail.component.scss'],
+  styleUrls: ['./invoice-detail.component.scss'],
   template: `
     <div class="container">
       <div class="row" style="margin-bottom: 10px;">
