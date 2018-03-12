@@ -2,10 +2,10 @@
   <mat-toolbar color="accent">
     <div class="nav-buttons">
       <div class="row navcontainer" *ngIf="currentPage$ | async as currentPage">
-        <div class="col-md-4 col-lg-4">
+        <div class="col-md-4 col-lg-4 mainnav">
           <a mat-button [routerLink]="['']">Back to Main Site</a>
         </div>
-        <div *ngIf="user$ | async as user" class="col-md-8 col-lg-8 right">
+        <div *ngIf="user$ | async as user" class="col-md-8 col-lg-8 right mainnav">
           <span *ngIf="user.uid">
             <a [class.active-link]="currentPage.state.url === '/invoicetracker/dashboard'" mat-button [routerLink]="['dashboard']">Dashboard</a>
             <div class="dropdown">
@@ -30,6 +30,23 @@
           </span>
           <a [class.active-link]="currentPage.state.url == '/invoicetracker'" *ngIf="!user.uid" class="login" mat-button (click)="googleLogin()">Login</a>
         </div>
+        <div *ngIf="user$ | async as user" class="col-md-12 col-lg-12 right mobilenav">
+          <div class="dropdown" style="width: 100%;">
+            <a style="float: left;" mat-button [routerLink]="['']">Back to Main Site</a>
+            <a (click)="toggleDropDown()" class="dropbtn" mat-button>Menu</a>
+            <div class="dropdown-content" *ngIf="!user.uid">
+              <a (click)="googleLogin()">Login</a>
+            </div>
+            <div [ngClass]="{'hideDropDown': hideMenu }" class="dropdown-content" *ngIf="user.uid">
+              <a (click)="toggleDropDown()" [routerLink]="['dashboard']">Dashboard</a>
+              <a (click)="toggleDropDown()" [routerLink]="['clients']">Clients</a>
+              <a (click)="toggleDropDown()" [routerLink]="['tasks']">Tasks</a>
+              <a (click)="toggleDropDown()" [routerLink]="['invoices']">Invoices</a>
+              <a (click)="logout()">Logout</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </mat-toolbar>
@@ -64,12 +81,13 @@
         </span>
       </a>
     </div>
-  </div>
-
-  <div class="row">
-    <div class="copyright">
+    <div class="copyright col-md-12 col-lg-12">
       <span>&copy; {{thisYear}} Chris Crooke</span>
       <a style="color: #35485e;" [routerLink]="['/invoicetracker/test', '38xhY3XALiPB0Ma3xI0n']">test</a>
     </div>
   </div>
+
+  <!-- <div class="row">
+    
+  </div> -->
 </div>

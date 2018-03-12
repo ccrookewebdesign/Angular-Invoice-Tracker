@@ -1,5 +1,6 @@
 import {
   Component,
+  OnInit,
   Input,
   Output,
   EventEmitter,
@@ -39,8 +40,8 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
       <td *ngIf="clientId === null"><a [routerLink]="['/invoicetracker/clients', invoice.clientId]">{{invoice.client.clientName}}</a></td>
       <td class="right">{{invoice.dueDate | date: dateFormat}}</td>
       <td *ngIf="clientId === null" class="right">{{invoice.sentDate | date: dateFormat}}</td>
-      <td class="right"><span (click)="setPaid()">{{invoice.invoicePaid ? 'Yes' : 'No'}}</span></td>
-      <td class="right">{{calcTotal(invoice.invoiceTotal) | number}}</td>
+      <td class="right"><span>{{invoice.invoicePaid ? 'Yes' : 'No'}}</span></td>
+      <td class="right">{{invoice.invoiceTotal | number}}</td>
       <td *ngIf="clientId === null && showLinks" class="right"><a [routerLink]="['/invoicetracker/invoices', invoice.id]">add/edit tasks</a></td>      
     </tr>
     <tr [ngClass]="animateOnRouteEnter" class="nohover" *ngIf="invoices.length !== 0">
@@ -57,27 +58,25 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
     <ng-template #loading>Loading&hellip;</ng-template>
   `
 })
-export class InvoicesTableComponent {
+export class InvoicesTableComponent implements OnInit {
   animateOnRouteEnter = 'route-enter-staggered';
+  sumTotal: number = 0;
+
   @Input() invoices: Invoice[];
   @Input() clientId: string = null;
   @Input() fontSize: string = '14px';
   @Input() dateFormat: string = 'MM/dd/yyyy';
   @Input() showLinks: boolean = true;
 
-  sumTotal: number = 0;
-
-  calcTotal(total: number) {
-    this.sumTotal += +total;
-    return total;
+  ngOnInit() {
+    this.sumTotal = this.calcTotal(this.invoices);
   }
 
-  /* calcTotal(invoices: Invoice[]) {
-    //this.sumTotal += +total;
-    console.log('here: ' + invoices);
-  } */
-
-  setPaid() {
-    console.log('123');
+  calcTotal(invoices: Invoice[]) {
+    let tempTotal = 0;
+    for (let invoice of this.invoices) {
+      tempTotal += +invoice.invoiceTotal;
+    }
+    return tempTotal;
   }
 }

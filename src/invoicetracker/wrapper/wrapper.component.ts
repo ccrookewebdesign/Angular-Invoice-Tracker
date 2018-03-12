@@ -25,6 +25,7 @@ export class WrapperComponent implements OnInit {
   user$: Observable<any>;
   currentPage$: Observable<any>;
   thisYear = new Date().getFullYear();
+  hideMenu: boolean = false;
 
   constructor(
     private router: Store<fromRoot.State>,
@@ -47,5 +48,9 @@ export class WrapperComponent implements OnInit {
     return new fromRoot.Go({
       path: ['']
     });
+  }
+
+  toggleDropDown() {
+    this.hideMenu = !this.hideMenu;
   }
 }

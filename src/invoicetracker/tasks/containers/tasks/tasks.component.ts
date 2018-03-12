@@ -13,10 +13,19 @@ import { Client } from '../../../models/client.model';
   styleUrls: ['tasks.component.scss'],
   template: `
   <div class="container">
-    <div class="row" style="margin-bottom: 10px;">
+    <!-- <div class="row" style="margin-bottom: 10px;">
       <div class="col-md-12 col-lg-12"><h1>Tasks</h1></div>
-    </div>  
+    </div>-->
     
+    <div class="row" style="margin-bottom: 10px;">
+      <div class="col-md-4 col-lg-4"><h1>Tasks</h1></div>
+      <div class="col-md-8 col-lg-8 right">
+        <div style="position: absolute; bottom: 8px; right: 20px;">
+          <span><a [routerLink]="['/invoicetracker/tasks/', 'new']" class="clients-menu">Add New Task</a></span>
+        </div>  
+      </div>
+    </div>
+
     <div class="row align-items-end" *ngIf="tasksCollection$ | async; let tasks;">
       <div *ngIf="!((tasks).length)">
           No tasks, add one to get started.

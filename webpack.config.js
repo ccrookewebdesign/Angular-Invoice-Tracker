@@ -26,7 +26,7 @@ const plugins = [
 if (process.env.NODE_ENV === 'production') {
   rules.push({
     //test: /\.ts$/,
-    //loaders: ['@ngtools/webpack'],
+    //loaders: ['@ngtools/webpack']
 
     test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
     loader: '@ngtools/webpack'

@@ -1,5 +1,6 @@
 import {
   Component,
+  OnInit,
   Input,
   Output,
   EventEmitter,
@@ -31,7 +32,6 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
       </td>
     </tr>
     <tr [ngClass]="animateOnRouteEnter" *ngFor="let task of tasks">
-      {{calcTotal(task.hours, task.total)}}
       <td scope="row" class="pl15">
         <a [routerLink]="['/invoicetracker/tasks', task.id]">{{task.taskDate | date: dateFormat}}</a>
       </td>
@@ -46,27 +46,34 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
         <a class="fs13" [routerLink]="['/invoicetracker/tasks/new/client', clientId]">add new task</a>
       </td>  
       <td *ngIf="clientId === null" colspan="3">&nbsp;</td>
-      <td class="right strong table-totals">{{sumHours | number}}</td>
-      <td class="right strong table-totals">{{sumTotal | number}}</td>
+      <td class="right strong table-totals">{{taskTotals.sumHours | number}}</td>
+      <td class="right strong table-totals">{{taskTotals.sumTotal | number}}</td>
     </tr>
     </tbody>
     </table>
     <ng-template #loading>Loading&hellip;</ng-template>
   `
 })
-export class TasksTableComponent {
+export class TasksTableComponent implements OnInit {
   animateOnRouteEnter = 'route-enter-staggered';
+  taskTotals: { sumHours: number; sumTotal: number };
+
   @Input() tasks: Tasks[];
   @Input() clientId: string = null;
   @Input() fontSize: string = '14px';
   @Input() dateFormat: string = 'MM/dd/yyyy';
 
-  sumHours: number = 0;
-  sumTotal: number = 0;
+  ngOnInit() {
+    this.taskTotals = this.calcTotal(this.tasks);
+  }
 
-  calcTotal(hours: number, total: number) {
-    this.sumHours += +hours;
-    this.sumTotal += +total;
-    //console.log(this.sumTotal);
+  calcTotal(tasks: Tasks[]) {
+    let tempHours = 0;
+    let tempTotal = 0;
+    for (let task of this.tasks) {
+      tempHours += +task.hours;
+      tempTotal += +task.total;
+    }
+    return { sumHours: tempHours, sumTotal: tempTotal };
   }
 }
