@@ -1,3 +1,7 @@
+.fs12 {
+  font-size: 12px !important;
+}
+
 .invoicestable {
   font-size: 14px;
   width: 100% !important;
@@ -31,6 +35,10 @@
   vertical-align: top;
 }
 
+.invoicestable td:last-child {
+  padding-right: 8px !important;
+}
+
 .invoicestable tr.headerrow {
   color: #9aaaba;
   font-weight: bold;
@@ -43,4 +51,28 @@ th.right {
 
 .invoicestable td.pl15 {
   padding-left: 15px !important;
+}
+
+@media only screen and (max-width: 990px) {
+  .invoicestable {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .mobileHide {
+    display: none;
+  }
+  .mobileShow {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .invoicestable td.pl15 {
+    padding-left: 2px !important;
+  }
+
+  .invoicestable td:last-child {
+    padding-right: 2px !important;
+  }
 }

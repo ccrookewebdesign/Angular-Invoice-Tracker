@@ -17,26 +17,30 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
     <div class="container">
       <div class="row" style="margin-bottom: 10px;">
         <div class="col-md-12 col-lg-12"><h1>Dashboard</h1></div>
-        <div class="col-md-6 col-lg-6" *ngIf="invoicesCollection$ | async; let invoices;">
+        <div class="dashboardframe col-md-12 col-lg-6" *ngIf="invoicesCollection$ | async; let invoices;">
           <mat-card [ngClass]="animateOnRouteEnter">
           <h4>Recent Invoices</h4>
           <div *ngIf="!invoices.length" class="norecords">
             No recent invoices for this client. <a [routerLink]="['/invoicetracker/invoices/new']">Add new invoice</a>
           </div>
-          <invoices-table *ngIf="invoices.length" [showLinks]="false" [dateFormat]="'M/d/yy'" [invoices]="invoices.slice(0,6)" [fontSize]="'12px'"></invoices-table>
-          <div class="right bottomlink">
+          <invoices-table *ngIf="invoices.length" [showLinks]="false" 
+            [dateFormat]="'M/d/yy'" [invoices]="invoices.slice(0,6)" 
+            [fontSize]="'12px'"></invoices-table> <!-- [dateFormat]="'M/d/yy'" -->
+          <div class="right bottomlink fs12">
             <a [routerLink]="['/invoicetracker/invoices']">view all invoices</a>&nbsp;&nbsp;|&nbsp;&nbsp;
             <a [routerLink]="['/invoicetracker/invoices/new']">add new invoice</a>
           </div>
           </mat-card>
         </div>
-        <div class="col-md-6 col-lg-6" *ngIf="tasksCollection$ | async; let tasks;">
+        <div class="dashboardframe col-md-12 col-lg-6" *ngIf="tasksCollection$ | async; let tasks;">
           <mat-card [ngClass]="animateOnRouteEnter">
           <h4>Recent Tasks</h4>
           <div *ngIf="!tasks.length" class="norecords">
             No recent tasks for this client. <a [routerLink]="['/invoicetracker/tasks/new']">Add new task</a>
           </div>
-          <tasks-table *ngIf="tasks.length" [dateFormat]="'M/d/yy'" [tasks]="tasks.slice(0,4)" [fontSize]="'12px'"></tasks-table>
+          <tasks-table *ngIf="tasks.length" 
+            [tasks]="tasks.slice(0,4)" 
+            [fontSize]="'12px'"></tasks-table> <!-- [dateFormat]="'MM/dd/yy'" -->
           <div class="right bottomlink">
             <a [routerLink]="['/invoicetracker/tasks']">view all tasks</a>&nbsp;&nbsp;|&nbsp;&nbsp;
             <a [routerLink]="['/invoicetracker/tasks/new']">add new task</a>

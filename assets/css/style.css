@@ -11,6 +11,15 @@ body {
   font-family: Roboto, sans-serif;
 }
 
+.fs12 {
+  font-size: 12px;
+}
+
+.bottomlink {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
 td.right,
 div.right {
   text-align: right;

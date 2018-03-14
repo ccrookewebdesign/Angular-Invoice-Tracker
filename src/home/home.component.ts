@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ANIMATE_ON_ROUTE_ENTER, routerTransition } from './router.transition';
+import { ANM_ROUTE_ENTER, routerTransition } from './router.transition';
 
 @Component({
   selector: 'home',
@@ -9,8 +9,9 @@ import { ANIMATE_ON_ROUTE_ENTER, routerTransition } from './router.transition';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  animateOnRouteEnter = 'route-enter-staggered'; // ANIMATE_ON_ROUTE_ENTER;
+  animateOnRouteEnter = ANM_ROUTE_ENTER; //'route-enter-staggered';
   thisYear = new Date().getFullYear();
+
   constructor() {}
 
   ngOnInit() {}

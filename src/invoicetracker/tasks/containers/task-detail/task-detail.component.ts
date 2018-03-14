@@ -23,7 +23,7 @@ import { Client } from '../../../models/client.model';
         </div>
       </div>
       <div class="row">
-        <div class="col-md-7 col-lg-7">
+        <div class="col-md-12 col-lg-7">
           <task-form
             [task]="task$ | async"
             [clients]="clients$ | async"

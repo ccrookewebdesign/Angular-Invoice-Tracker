@@ -1,3 +1,7 @@
+.fs12 {
+  font-size: 12px !important;
+}
+
 .taskstable {
   font-size: 14px;
   width: 100% !important;
@@ -31,6 +35,10 @@
   vertical-align: top;
 }
 
+.taskstable td:last-child {
+  padding-right: 8px !important;
+}
+
 .taskstable tr.headerrow {
   color: #9aaaba;
   font-weight: bold;
@@ -43,4 +51,35 @@ th.right {
 
 .taskstable td.pl15 {
   padding-left: 15px !important;
+}
+
+@media only screen and (max-width: 990px) {
+  .taskstable {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 770px) {
+  .mobileHide {
+    display: none;
+  }
+  .mobileShow {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .mobileSmall {
+    font-size: 10px;
+  }
+
+  .taskstable td.pl15 {
+    padding-left: 2px !important;
+  }
+  .taskstable td:last-child {
+    padding-right: 2px !important;
+  }
+
+  mat-card {
+    padding-left: 1px !important;
+  }
 }

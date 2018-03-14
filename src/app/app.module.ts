@@ -22,20 +22,13 @@ import { reducers, effects, CustomSerializer } from './store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { storeFreeze } from 'ngrx-store-freeze';
 
-// this would be done dynamically with webpack for builds
-/* const environment = {
-  development: true,
-  production: false
-}; */
-
 export const metaReducers: MetaReducer<any>[] = !environment.production
   ? [storeFreeze]
   : [];
 
-// bootstrap
 import { AppComponent } from './containers/app/app.component';
 import { HomeComponent } from './../home/home.component';
-// routes
+
 export const ROUTES: Routes = [
   {
     path: '',

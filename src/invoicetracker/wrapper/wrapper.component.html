@@ -33,16 +33,15 @@
         <div *ngIf="user$ | async as user" class="col-md-12 col-lg-12 right mobilenav">
           <div class="dropdown" style="width: 100%;">
             <a style="float: left;" mat-button [routerLink]="['']">Back to Main Site</a>
-            <a (click)="toggleDropDown()" class="dropbtn" mat-button>Menu</a>
-            <div class="dropdown-content" *ngIf="!user.uid">
-              <a (click)="googleLogin()">Login</a>
-            </div>
+            <a *ngIf="!user.uid" (click)="googleLogin()" mat-button>Login</a>
+            <a *ngIf="user.uid" (click)="toggleDropDown()" class="dropbtn" mat-button>Menu</a>
+
             <div [ngClass]="{'hideDropDown': hideMenu }" class="dropdown-content" *ngIf="user.uid">
-              <a (click)="toggleDropDown()" [routerLink]="['dashboard']">Dashboard</a>
-              <a (click)="toggleDropDown()" [routerLink]="['clients']">Clients</a>
-              <a (click)="toggleDropDown()" [routerLink]="['tasks']">Tasks</a>
-              <a (click)="toggleDropDown()" [routerLink]="['invoices']">Invoices</a>
-              <a (click)="logout()">Logout</a>
+              <a (click)="toggleDropDown()" [routerLink]="['dashboard']" mat-button>Dashboard</a>
+              <a (click)="toggleDropDown()" [routerLink]="['clients']" mat-button>Clients</a>
+              <a (click)="toggleDropDown()" [routerLink]="['tasks']" mat-button>Tasks</a>
+              <a (click)="toggleDropDown()" [routerLink]="['invoices']" mat-button>Invoices</a>
+              <a (click)="toggleDropDown();logout()" mat-button>Logout</a>
             </div>
           </div>
         </div>

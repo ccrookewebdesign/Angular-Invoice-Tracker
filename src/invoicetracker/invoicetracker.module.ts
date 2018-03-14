@@ -11,12 +11,10 @@ import { reducers, effects } from './store';
 
 import { SharedModule } from './shared/shared.module';
 
-// components
 import * as fromClientComponents from './clients/components';
 import * as fromTaskComponents from './tasks/components';
 import * as fromInvoiceComponents from './invoices/components';
 
-// containers
 import * as fromWrapperContainers from './wrapper';
 import * as fromHomeContainers from './home';
 import * as fromDashboardContainers from './dashboard/containers';
@@ -25,13 +23,10 @@ import * as fromTaskContainers from './tasks/containers';
 import * as fromInvoiceContainers from './invoices/containers';
 import * as fromTestContainers from './zztesting/containers';
 
-// guards
 import * as fromGuards from './guards';
 
-// services
 import * as fromServices from './services';
 
-// routes
 export const ROUTES: Routes = [
   {
     path: '',
@@ -161,7 +156,6 @@ export const ROUTES: Routes = [
       }
     ]
   },
-  //{ path: '', redirectTo: 'invoicetracker', pathMatch: 'full' },
   { path: '**', component: fromHomeContainers.InvoiceTrackerHomeComponent }
 ];
 

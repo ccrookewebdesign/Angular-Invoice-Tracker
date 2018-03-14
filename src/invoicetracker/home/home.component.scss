@@ -9,6 +9,11 @@
   height: 100%;
 }
 
+.appdetails {
+  font-size: 18px;
+  padding-top: 15px;
+}
+
 .title {
   font-size: 45px;
   margin-bottom: 40px;
@@ -43,6 +48,15 @@ a:hover {
 }
 
 @media only screen and (max-width: 770px) {
+  .main {
+    padding-top: 0;
+    margin-bottom: 15px;
+    margin-top: 0 !important  ;
+  }
+
+  .title {
+    margin-bottom: 15px;
+  }
 }
 
 @media only screen and (max-width: 580px) {
@@ -66,8 +80,12 @@ a:hover {
   }
 
   .aboutme {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.5em;
+  }
+
+  .appdetails {
+    font-size: 16px;
   }
 }
 

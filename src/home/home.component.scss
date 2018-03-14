@@ -38,10 +38,6 @@ p.angular {
   margin-top: 40px;
 }
 
-a {
-  /* color: white;
-  text-decoration: underline; */
-}
 a:hover {
   text-decoration: none;
 }
@@ -87,9 +83,11 @@ div.tiny {
   .stupid-face img {
     max-width: 400px;
   }
+
   .aboutme {
     width: 100%;
   }
+
   div.col-md-6,
   div.col-lg-6 {
     min-width: 50% !important;
@@ -132,9 +130,11 @@ div.tiny {
   .stupid-face {
     display: none;
   }
+
   .aboutme {
     width: 100%;
   }
+
   div.col-md-6,
   div.col-lg-6 {
     min-width: 100% !important;
@@ -181,7 +181,6 @@ div.tiny {
   }
 
   span.footer-link {
-    //font-size: 11px;
     padding-right: 5px;
   }
 }
@@ -192,7 +191,6 @@ div.tiny {
   }
 
   span.footer-link {
-    //font-size: 11px;
     padding-right: 15px;
   }
 }

@@ -3,6 +3,10 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 @import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
+.temptest {
+  border: 1px solid white !important;
+}
+
 .mainnav {
   display: block;
 }
@@ -120,8 +124,13 @@ div.tiny {
     display: block;
   }
 
+  mat-toolbar {
+    margin-bottom: 15px;
+  }
+
   .dropdown-content {
     width: 100% !important;
+    text-align: left;
   }
 
   .dropdown-content a {
@@ -132,6 +141,7 @@ div.tiny {
     color: #ffffff;
     cursor: pointer;
     width: 100%;
+    text-align: left !important;
   }
 
   .dropdown-content a:hover {

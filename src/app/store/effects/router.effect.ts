@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Effect, Actions } from '@ngrx/effects';
-import * as RouterActions from '../actions/router.action';
-
 import { tap, map } from 'rxjs/operators';
+
+import * as RouterActions from '../actions/router.action';
 
 @Injectable()
 export class RouterEffects {

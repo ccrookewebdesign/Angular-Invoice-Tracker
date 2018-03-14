@@ -26,7 +26,7 @@ import { Tasks } from '../../../models/task.model';
         </div>
       </div>
       <div class="row">
-        <div class="col-md-7 col-lg-7">
+        <div class="col-md-12 col-lg-7">
           <client-form
             [client]="client$ | async"
             (create)="onCreate($event)"
@@ -35,7 +35,7 @@ import { Tasks } from '../../../models/task.model';
             (cancel)="onCancel($event)">
           </client-form>
         </div>
-        <div class="col-md-5 col-lg-5" *ngIf="client$ | async; let client;">
+        <div class="col-md-12 col-lg-5" *ngIf="client$ | async; let client;">
           <div class="row align-items-end" *ngIf="clientInvoices$ | async; let invoices;">
             <div class="col-md-12 col-lg-12 client-padding">
             <mat-card [ngClass]="animateOnRouteEnter">
@@ -44,6 +44,10 @@ import { Tasks } from '../../../models/task.model';
                 No recent invoices for this client. <a [routerLink]="['/invoicetracker/invoices/new/client', client.id]">Add new invoice</a>
               </div>
               <invoices-table *ngIf="invoices.length" [clientId]="client.id" [invoices]="invoices.slice(0,displayInvoiceCount)" [fontSize]="'12px'"></invoices-table>        
+              <div class="right bottomlink fs12">
+                <a [routerLink]="['/invoicetracker/invoices/client/', client.id]">view all invoices</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a [routerLink]="['/invoicetracker/invoices/new/client', client.id]">add new invoice</a>
+              </div>
             </mat-card>
             </div>    
           </div>
@@ -56,6 +60,10 @@ import { Tasks } from '../../../models/task.model';
                 No recent tasks for this client. <a [routerLink]="['/invoicetracker/tasks/new/client', client.id]">Add new task</a>
               </div>
               <tasks-table *ngIf="tasks.length" [clientId]="client.id" [tasks]="tasks.slice(0,displayTaskCount)" [fontSize]="'12px'"></tasks-table>        
+              <div class="right bottomlink fs12">
+                <a [routerLink]="['/invoicetracker/tasks/client/', client.id]">view all tasks</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                <a [routerLink]="['/invoicetracker/tasks/new/client', client.id]">add new task</a>
+              </div>
             </mat-card>
             </div>    
           </div>

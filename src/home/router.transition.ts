@@ -8,14 +8,14 @@ import {
   sequence
 } from '@angular/animations';
 
-export const ANIMATE_ON_ROUTE_ENTER = 'route-enter-staggered';
+export const ANM_ROUTE_ENTER = 'route-enter-staggered';
 
 export const routerTransition = trigger('routerTransition', [
   transition('* <=> *', [
     query(':enter > *', style({ opacity: 0, position: 'fixed' }), {
       optional: true
     }),
-    query(':enter .' + ANIMATE_ON_ROUTE_ENTER, style({ opacity: 0 }), {
+    query(':enter .' + ANM_ROUTE_ENTER, style({ opacity: 0 }), {
       optional: true
     }),
     sequence([
@@ -48,7 +48,7 @@ export const routerTransition = trigger('routerTransition', [
       )
     ]),
     query(
-      ':enter .' + ANIMATE_ON_ROUTE_ENTER,
+      ':enter .' + ANM_ROUTE_ENTER,
       stagger(40, [
         style({ transform: 'translateY(15%)', opacity: 0 }),
         animate(
