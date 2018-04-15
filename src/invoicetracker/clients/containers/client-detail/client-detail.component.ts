@@ -1,17 +1,17 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
+import * as firebase from 'firebase';
+
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from '../../../../app/store';
 import * as fromStore from '../../../store';
 
-import * as firebase from 'firebase';
-
-import * as fromTaskService from '../../../services';
+import * as fromTaskService from '../../../shared/services';
 
 import { Client } from '../../../models/client.model';
-import { Invoices } from '../../../models/invoice.model';
+import { Invoices, Invoice } from '../../../models/invoice.model';
 import { Tasks } from '../../../models/task.model';
 
 @Component({
@@ -43,7 +43,12 @@ import { Tasks } from '../../../models/task.model';
               <div *ngIf="!invoices.length" class="norecords">
                 No recent invoices for this client. <a [routerLink]="['/invoicetracker/invoices/new/client', client.id]">Add new invoice</a>
               </div>
-              <invoices-table *ngIf="invoices.length" [clientId]="client.id" [invoices]="invoices.slice(0,displayInvoiceCount)" [fontSize]="'12px'"></invoices-table>        
+              <invoices-table 
+                *ngIf="invoices.length" 
+                [clientId]="client.id" 
+                [invoices]="invoices.slice(0,displayInvoiceCount)" 
+                [fontSize]="'12px'"
+                (updatePaid)="updatePaid($event)"></invoices-table>        
               <div class="right bottomlink fs12">
                 <a [routerLink]="['/invoicetracker/invoices/client/', client.id]">view all invoices</a>&nbsp;&nbsp;|&nbsp;&nbsp;
                 <a [routerLink]="['/invoicetracker/invoices/new/client', client.id]">add new invoice</a>
@@ -109,5 +114,15 @@ export class ClientDetailComponent implements OnInit {
 
   onCancel(event: Client) {
     this.store.dispatch(new fromRoot.Back());
+  }
+
+  updatePaid(event: Invoice) {
+    event.invoicePaid = !event.invoicePaid;
+    if (event.invoicePaid) {
+      event.paidDate = firebase.firestore.FieldValue.serverTimestamp();
+    } else {
+      event.paidDate = null;
+    }
+    this.invoiceService.updateInvoice(event);
   }
 }

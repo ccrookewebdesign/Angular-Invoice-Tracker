@@ -6,7 +6,7 @@ import { of } from 'rxjs/observable/of';
 
 import * as fromRoot from '../../../app/store';
 import * as invoiceActions from '../actions/invoices.action';
-import * as fromServices from '../../services';
+import * as fromServices from '../../shared/services';
 
 @Injectable()
 export class InvoicesEffects {

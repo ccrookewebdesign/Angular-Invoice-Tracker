@@ -1,15 +1,16 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
+import * as firebase from 'firebase';
+
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { tap, map, filter, take, switchMap } from 'rxjs/operators';
 import * as fromStore from '../../../store';
 
-import * as fromClientService from '../../../services';
+import * as fromClientService from '../../../shared/services';
 
 import { Client } from '../../../models/client.model';
-
-import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transition';
+import { Invoice, Invoices } from '../../../models/invoice.model';
 
 @Component({
   selector: 'clients',
@@ -17,16 +18,13 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
   styleUrls: ['./clients.component.scss'],
   template: `
     <div class="container">
-      <!--<div class="row" style="margin-bottom: 10px;">
-        <div class="col-md-12 col-lg-12"><h1>Clients</h1></div>
-      </div>-->  
       <div class="row" style="margin-bottom: 10px;">
-        <div class="col-md-4 col-lg-4"><h1>Clients</h1></div>
-        <div class="col-md-8 col-lg-8 right">
-          <div style="position: absolute; bottom: 5px; right: 20px;">
+        <div class="col-sm-12 col-md-6 col-lg-4"><h1>Clients</h1></div>
+        <div class="col-sm-12 col-md-6 col-lg-8 clientmenu">
+          <div style="">
             <client-filter (toggle)="updateFilter($event)" [showArchived]="showArchived$ | async"></client-filter>
             <span><a [routerLink]="['/invoicetracker/clients/', 'new']" class="clients-menu">Add New Client</a></span>
-          </div>  
+          </div>
         </div>
       </div>
       <div class="row align-items-end" *ngIf="clients$ | async; let clients;">
@@ -35,7 +33,9 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
         </div>
         
         <div [ngClass]="animateOnRouteEnter" *ngFor="let client of clients"  class="col-md-6 col-lg-6">
-          <client-item [client]="client"></client-item>        
+          <client-item 
+            [client]="client"
+            (updatePaid)="updatePaid($event)"></client-item>
         </div>    
       </div>
     </div>  
@@ -48,25 +48,25 @@ export class ClientsComponent implements OnInit {
 
   constructor(
     private store: Store<fromStore.InvoiceTrackerState>,
-    private clientService: fromClientService.ClientsService
+    private clientService: fromClientService.ClientsService,
+    private invoiceService: fromClientService.InvoicesService
   ) {}
 
   ngOnInit() {
-    //this.clients$ = this.store.select(fromStore.getActiveClients);
     this.clients$ = this.clientService.getClientCollection();
-    this.showArchived$ = this.store.select(
-      fromStore.getShowArchived
-    ) /* .pipe(
-      map(showArchived => {
-        if (showArchived) {
-          this.clients$ = this.store.select(fromStore.getAllClients);
-        } else {
-          this.clients$ = this.store.select(fromStore.getActiveClients);
-        }
-        //console.log(showArchived);
-        return showArchived;
-      })
-    ) */;
+    this.showArchived$ = this.store.select(fromStore.getShowArchived);
+  }
+
+  updatePaid(event: Invoice) {
+    let x = { ...event };
+    x.invoicePaid = !x.invoicePaid;
+    if (x.invoicePaid) {
+      x.paidDate = firebase.firestore.FieldValue.serverTimestamp();
+    } else {
+      x.paidDate = null;
+    }
+
+    this.invoiceService.updateInvoice(x);
   }
 
   updateFilter(event: boolean) {

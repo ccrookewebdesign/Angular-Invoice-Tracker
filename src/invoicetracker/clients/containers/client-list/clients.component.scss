@@ -1,32 +1,24 @@
-:host {
-  display: block;
+div.clientmenu {
+  text-align: right;
 }
-.clients {
-  position: relative;
-  padding-top: 45px;
-  &__new {
-    //margin: -35px -35px 35px;
-    //background: #f9f9f9;
-    padding: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  &__list {
-    display: flex;
-    flex-wrap: wrap;
-    client-item {
-      //background: #fff;
-      flex: 0 0 33%;
-      margin: 0 0 55px;
-      transition: 0.2s all ease;
-      &:hover {
-        transform: scale(1.05);
-      }
-    }
-  }
+
+div.clientmenu div {
+  position: absolute;
+  bottom: 5px;
+  right: 20px;
 }
 
 a.clients-menu {
   font-size: 0.9em;
+}
+
+@media only screen and (max-width: 490px) {
+  div.clientmenu {
+    text-align: left;
+    padding-left: 40px;
+  }
+
+  div.clientmenu div {
+    position: relative;
+  }
 }

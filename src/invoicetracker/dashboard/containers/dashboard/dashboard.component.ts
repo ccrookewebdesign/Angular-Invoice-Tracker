@@ -1,8 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
+import * as firebase from 'firebase';
+
 import { Observable } from 'rxjs/Observable';
 
-import * as fromDashboardService from '../../../services';
+import * as fromDashboardService from '../../../shared/services';
 
 import { Invoice, Invoices } from '../../../models/invoice.model';
 import { Task, Tasks } from '../../../models/task.model';
@@ -23,9 +25,13 @@ import { ANIMATE_ON_ROUTE_ENTER } from '../../../shared/animations/router.transi
           <div *ngIf="!invoices.length" class="norecords">
             No recent invoices for this client. <a [routerLink]="['/invoicetracker/invoices/new']">Add new invoice</a>
           </div>
-          <invoices-table *ngIf="invoices.length" [showLinks]="false" 
-            [dateFormat]="'M/d/yy'" [invoices]="invoices.slice(0,6)" 
-            [fontSize]="'12px'"></invoices-table> <!-- [dateFormat]="'M/d/yy'" -->
+          <invoices-table 
+            *ngIf="invoices.length" 
+            [showLinks]="false" 
+            [dateFormat]="'M/d/yy'" 
+            [invoices]="invoices.slice(0,6)" 
+            [fontSize]="'12px'"
+            (updatePaid)="updatePaid($event)"></invoices-table> <!-- [dateFormat]="'M/d/yy'" -->
           <div class="right bottomlink fs12">
             <a [routerLink]="['/invoicetracker/invoices']">view all invoices</a>&nbsp;&nbsp;|&nbsp;&nbsp;
             <a [routerLink]="['/invoicetracker/invoices/new']">add new invoice</a>
@@ -64,5 +70,16 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.invoicesCollection$ = this.invoiceService.getInvoiceCollection();
     this.tasksCollection$ = this.taskService.getTaskCollection();
+  }
+
+  updatePaid(event: Invoice) {
+    let x = { ...event };
+    x.invoicePaid = !x.invoicePaid;
+    if (x.invoicePaid) {
+      x.paidDate = firebase.firestore.FieldValue.serverTimestamp();
+    } else {
+      x.paidDate = null;
+    }
+    this.invoiceService.updateInvoice(x);
   }
 }

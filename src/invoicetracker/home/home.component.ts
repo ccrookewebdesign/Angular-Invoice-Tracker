@@ -12,7 +12,7 @@ import {
   styleUrls: ['./home.component.scss']
 })
 export class InvoiceTrackerHomeComponent implements OnInit {
-  animateOnRouteEnter = 'route-enter-staggered';
+  animateOnRouteEnter = ANIMATE_ON_ROUTE_ENTER;
   constructor() {}
 
   ngOnInit() {}

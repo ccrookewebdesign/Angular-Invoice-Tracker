@@ -11,21 +11,10 @@ import { reducers, effects } from './store';
 
 import { SharedModule } from './shared/shared.module';
 
-import * as fromClientComponents from './clients/components';
-import * as fromTaskComponents from './tasks/components';
-import * as fromInvoiceComponents from './invoices/components';
-
 import * as fromWrapperContainers from './wrapper';
 import * as fromHomeContainers from './home';
-import * as fromDashboardContainers from './dashboard/containers';
-import * as fromClientContainers from './clients/containers';
-import * as fromTaskContainers from './tasks/containers';
-import * as fromInvoiceContainers from './invoices/containers';
-import * as fromTestContainers from './zztesting/containers';
 
 import * as fromGuards from './guards';
-
-import * as fromServices from './services';
 
 export const ROUTES: Routes = [
   {
@@ -34,7 +23,9 @@ export const ROUTES: Routes = [
     children: [
       {
         path: '',
-        component: fromHomeContainers.InvoiceTrackerHomeComponent
+        component:
+          fromHomeContainers.InvoiceTrackerHomeComponent /* ,
+        data: { state: 'invoicetracker' } */
       },
       {
         path: 'dashboard',
@@ -44,7 +35,7 @@ export const ROUTES: Routes = [
           fromGuards.InvoicesGuard,
           fromGuards.TasksGuard
         ],
-        component: fromDashboardContainers.DashboardComponent
+        loadChildren: './dashboard/dashboard.module#DashboardModule'
       },
       {
         path: 'clients',
@@ -53,22 +44,7 @@ export const ROUTES: Routes = [
           fromGuards.ClientsGuard,
           fromGuards.InvoicesGuard
         ],
-        component: fromClientContainers.ClientsComponent
-      },
-      {
-        path: 'clients/new',
-        canActivate: [fromGuards.AuthGuard],
-        component: fromClientContainers.ClientDetailComponent
-      },
-      {
-        path: 'clients/:clientId',
-        canActivate: [
-          fromGuards.AuthGuard,
-          fromGuards.ClientsGuard,
-          fromGuards.InvoicesGuard,
-          fromGuards.TasksGuard
-        ],
-        component: fromClientContainers.ClientDetailComponent
+        loadChildren: './clients/clients.module#ClientsModule'
       },
       {
         path: 'tasks',
@@ -77,82 +53,17 @@ export const ROUTES: Routes = [
           fromGuards.ClientsGuard,
           fromGuards.TasksGuard
         ],
-        component: fromTaskContainers.TasksComponent
-      },
-      {
-        path: 'tasks/client/:clientId',
-        canActivate: [
-          fromGuards.AuthGuard,
-          fromGuards.ClientsGuard,
-          fromGuards.TasksGuard
-        ],
-        component: fromTaskContainers.TasksComponent
-      },
-      {
-        path: 'tasks/new',
-        canActivate: [fromGuards.AuthGuard, fromGuards.ClientsGuard],
-        component: fromTaskContainers.TaskDetailComponent
-      },
-      {
-        path: 'tasks/new/client/:clientId',
-        canActivate: [fromGuards.AuthGuard, fromGuards.ClientsGuard],
-        component: fromTaskContainers.TaskDetailComponent
-      },
-      {
-        path: 'tasks/:taskId',
-        canActivate: [
-          fromGuards.AuthGuard,
-          fromGuards.ClientsGuard,
-          fromGuards.TasksGuard
-        ],
-        component: fromTaskContainers.TaskDetailComponent
+        loadChildren: './tasks/tasks.module#TasksModule'
       },
       {
         path: 'invoices',
         canActivate: [
           fromGuards.AuthGuard,
           fromGuards.ClientsGuard,
-          fromGuards.InvoicesGuard
-        ],
-        component: fromInvoiceContainers.InvoicesComponent
-      },
-      {
-        path: 'invoices/client/:clientId',
-        canActivate: [
-          fromGuards.AuthGuard,
-          fromGuards.ClientsGuard,
-          fromGuards.InvoicesGuard
-        ],
-        component: fromInvoiceContainers.InvoicesComponent
-      },
-      {
-        path: 'invoices/new',
-        canActivate: [fromGuards.AuthGuard, fromGuards.ClientsGuard],
-        component: fromInvoiceContainers.InvoiceDetailComponent
-      },
-      {
-        path: 'invoices/new/client/:clientId',
-        canActivate: [fromGuards.AuthGuard, fromGuards.ClientsGuard],
-        component: fromInvoiceContainers.InvoiceDetailComponent
-      },
-      {
-        path: 'invoices/:invoiceId',
-        canActivate: [
-          fromGuards.AuthGuard,
-          fromGuards.ClientsGuard,
-          fromGuards.InvoicesGuard
-        ],
-        component: fromInvoiceContainers.InvoiceDetailComponent
-      },
-      {
-        path: 'test/:invoiceId',
-        canActivate: [
-          fromGuards.AuthGuard,
-          fromGuards.ClientsGuard,
           fromGuards.InvoicesGuard,
           fromGuards.TasksGuard
         ],
-        component: fromTestContainers.TestComponent
+        loadChildren: './invoices/invoices.module#InvoicesModule'
       }
     ]
   },
@@ -167,32 +78,16 @@ export const ROUTES: Routes = [
     RouterModule.forChild(ROUTES),
     StoreModule.forFeature('invoicetracker', reducers),
     EffectsModule.forFeature(effects),
-    SharedModule
+    SharedModule.forRoot()
   ],
-  providers: [...fromServices.services, ...fromGuards.guards],
+  providers: [...fromGuards.guards],
   declarations: [
-    ...fromClientContainers.containers,
-    ...fromClientComponents.components,
-    ...fromTaskContainers.containers,
-    ...fromTaskComponents.components,
-    ...fromInvoiceContainers.containers,
-    ...fromInvoiceComponents.components,
-    ...fromDashboardContainers.containers,
     ...fromHomeContainers.containers,
-    ...fromWrapperContainers.containers,
-    ...fromTestContainers.containers
+    ...fromWrapperContainers.containers
   ],
   exports: [
-    ...fromClientContainers.containers,
-    ...fromClientComponents.components,
-    ...fromTaskContainers.containers,
-    ...fromTaskComponents.components,
-    ...fromInvoiceContainers.containers,
-    ...fromInvoiceComponents.components,
-    ...fromDashboardContainers.containers,
     ...fromHomeContainers.containers,
-    ...fromWrapperContainers.containers,
-    ...fromTestContainers.containers
+    ...fromWrapperContainers.containers
   ]
 })
 export class InvoiceTrackerModule {}

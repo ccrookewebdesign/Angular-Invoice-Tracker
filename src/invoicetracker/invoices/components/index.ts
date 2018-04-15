@@ -1,7 +1,7 @@
-import { InvoicesTableComponent } from './invoices-table/invoices-table.component';
 import { InvoiceFormComponent } from './invoice-form/invoice-form.component';
+import { InvoiceTasksComponent } from './invoice-tasks/invoice-tasks.component';
 
-export const components: any[] = [InvoicesTableComponent, InvoiceFormComponent];
+export const components: any[] = [InvoiceFormComponent, InvoiceTasksComponent];
 
-export * from './invoices-table/invoices-table.component';
 export * from './invoice-form/invoice-form.component';
+export * from './invoice-tasks/invoice-tasks.component';

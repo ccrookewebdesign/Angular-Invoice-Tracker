@@ -1,26 +1,16 @@
 {
+  "database": {
+    "rules": "database.rules.json"
+  },
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**",
-      ".firebaserc",
-      ".vscode",
-      ".git",
-      ".gitignore",
-      ".editorconfig",
-      "src/**/.*",
-      "db.json",
-      "package.json",
-      "README.md",
-      "tsconfig.json",
-      "webpack.config.js",
-      "yarn.lock",
       "**/node_modules/**"
     ],
     "rewrites": [

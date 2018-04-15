@@ -1,10 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
+import * as firebase from 'firebase';
+
 import { Observable } from 'rxjs/Observable';
 
-import * as fromInvoiceService from '../../../services';
+import * as fromInvoiceService from '../../../shared/services';
 
-import { Invoices } from '../../../models/invoice.model';
+import { Invoices, Invoice } from '../../../models/invoice.model';
 import { Client } from '../../../models/client.model';
 
 @Component({
@@ -13,10 +15,6 @@ import { Client } from '../../../models/client.model';
   styleUrls: ['./invoices.component.scss'],
   template: `
   <div class="container">
-    <!-- <div class="row" style="margin-bottom: 10px;">
-      <div class="col-md-12 col-lg-12"><h1>Invoices</h1></div>
-    </div> -->
-    
     <div class="row" style="margin-bottom: 10px;">
       <div class="col-md-4 col-lg-4"><h1>Invoices</h1></div>
       <div class="col-md-8 col-lg-8 right">
@@ -33,7 +31,9 @@ import { Client } from '../../../models/client.model';
       <!-- <div>{{ invoices | json }}</div> -->
       <div class="col-md-12 col-lg-12 client-padding">
         <mat-card [ngClass]="animateOnRouteEnter">
-          <invoices-table [invoices]="invoices"></invoices-table>
+          <invoices-table 
+            [invoices]="invoices"
+            (updatePaid)="updatePaid($event)"></invoices-table>
         </mat-card>  
       </div>    
     </div>
@@ -48,5 +48,16 @@ export class InvoicesComponent implements OnInit {
 
   ngOnInit() {
     this.invoicesCollection$ = this.invoiceService.getInvoiceCollection();
+  }
+
+  updatePaid(event: Invoice) {
+    let x = { ...event };
+    x.invoicePaid = !x.invoicePaid;
+    if (x.invoicePaid) {
+      x.paidDate = firebase.firestore.FieldValue.serverTimestamp();
+    } else {
+      x.paidDate = null;
+    }
+    this.invoiceService.updateInvoice(x);
   }
 }

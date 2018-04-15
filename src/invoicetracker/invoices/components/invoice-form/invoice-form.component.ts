@@ -99,6 +99,12 @@ export class InvoiceFormComponent implements OnChanges, OnInit {
     }
   }
 
+  setPaidDate() {
+    if (!this.invoicePaidControl.value) {
+      this.form.patchValue({ paidDate: null });
+    }
+  }
+
   createInvoice(form: FormGroup) {
     const { value, valid } = form;
     if (valid) {

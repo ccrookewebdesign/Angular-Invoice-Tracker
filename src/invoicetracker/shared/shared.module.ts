@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -19,9 +20,14 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import * as fromServices from './services';
+
+import * as fromSharedComponents from './components';
+
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule,
     FormsModule,
     MatButtonModule,
     MatDatepickerModule,
@@ -40,7 +46,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatIconModule,
     MatTooltipModule
   ],
-  declarations: [],
+  declarations: [...fromSharedComponents.components],
   exports: [
     CommonModule,
     FormsModule,
@@ -59,8 +65,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSelectModule,
     MatToolbarModule,
     MatIconModule,
-    MatTooltipModule
-  ],
-  providers: []
+    MatTooltipModule,
+    ...fromSharedComponents.components
+  ]
 })
-export class SharedModule {}
+export class SharedModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [...fromServices.services]
+    };
+  }
+}

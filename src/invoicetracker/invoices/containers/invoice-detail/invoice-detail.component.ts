@@ -8,9 +8,9 @@ import * as fromStore from '../../../store';
 
 import * as firebase from 'firebase';
 
-import * as fromInvoiceService from '../../../services';
+import * as fromInvoiceService from '../../../shared/services';
 
-import { Invoice } from '../../../models/invoice.model';
+import { Invoices, Invoice } from '../../../models/invoice.model';
 import { Client } from '../../../models/client.model';
 
 @Component({
@@ -25,7 +25,8 @@ import { Client } from '../../../models/client.model';
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 col-lg-7">
+        <div class="col-md-12 col-lg-6">
+        <!-- {{ invoicesCollection$ | async | json }} -->
           <invoice-form
             [invoice]="invoice$ | async"
             [clients]="clients$ | async"
@@ -36,12 +37,16 @@ import { Client } from '../../../models/client.model';
             (cancel)="onCancel($event)">        
           </invoice-form>
         </div>
+        <div class="col-md-12 col-lg-6">
+          <invoice-tasks [tasks]=""></invoice-tasks>
+        </div>
       </div>
     </div>
   `
 })
 export class InvoiceDetailComponent implements OnInit {
   invoice$: Observable<Invoice>;
+  //invoicesCollection$: Observable<Invoices[]>;
   clients$: Observable<Client[]>;
   selectedClient$: Observable<Client>;
 
@@ -53,10 +58,10 @@ export class InvoiceDetailComponent implements OnInit {
 
   ngOnInit() {
     this.invoice$ = this.store.select(fromStore.getSelectedInvoice);
-    //this.invoice$ = this.invoiceService.getInvoice();
-
     this.clients$ = this.store.select(fromStore.getActiveClients);
     this.selectedClient$ = this.store.select(fromStore.getSelectedClient);
+
+    //this.invoicesCollection$ = this.invoiceService.getInvoice();
   }
 
   onCreate(event: Invoice) {

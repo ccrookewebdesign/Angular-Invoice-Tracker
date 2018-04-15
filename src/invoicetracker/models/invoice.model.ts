@@ -9,7 +9,7 @@ export interface Invoice {
   sentDate: string;
   invoiceTotal: number;
   notes: string;
-  paidDate: string;
+  paidDate: any;
   client: object;
   tasks?: Tasks[];
   id?: string;
@@ -24,7 +24,7 @@ export interface Invoices {
   sentDate: string;
   invoiceTotal: number;
   notes: string;
-  paidDate: string;
+  paidDate: any;
   tasks: Tasks[];
   client: object;
   id?: string;

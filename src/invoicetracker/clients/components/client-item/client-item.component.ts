@@ -6,6 +6,8 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
+import { Invoice } from './../../../models/invoice.model';
+
 @Component({
   selector: 'client-item',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,10 +17,22 @@ import {
       <mat-card-title>
         <a [routerLink]="['/invoicetracker/clients', client.id]">{{ client.clientName }}</a>
       </mat-card-title>
-      <invoices-table *ngIf="client.invoices.length" [clientId]="client.id" [invoices]="client.invoices.slice(0,3)" [fontSize]="'12px'"></invoices-table>
+      <invoices-table 
+        *ngIf="client.invoices.length" 
+        [clientId]="client.id" 
+        [invoices]="client.invoices.slice(0,3)" 
+        [fontSize]="'12px'"
+        (updatePaid)="setPaid($event)"></invoices-table> <!--  -->
     </mat-card>
   `
 })
 export class ClientItemComponent {
   @Input() client: any;
+
+  @Output() updatePaid = new EventEmitter<any>();
+
+  setPaid(invoice: Invoice) {
+    //console.log(invoice);
+    this.updatePaid.emit(invoice);
+  }
 }

@@ -32,7 +32,7 @@
     </mat-form-field>
 
     <section class="mat-check" style="margin-bottom: 15px;">
-      <mat-checkbox style="border-bottom: none!important" id="invoicePaid" formControlName="invoicePaid">
+      <mat-checkbox (change)="setPaidDate()" style="border-bottom: none!important" id="invoicePaid" formControlName="invoicePaid">
         <span style="font-weight: normal;">Invoice Paid</span>
       </mat-checkbox>
     </section>
