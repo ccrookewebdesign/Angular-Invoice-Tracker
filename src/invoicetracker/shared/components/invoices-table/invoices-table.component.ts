@@ -54,7 +54,7 @@ import { Invoice, Invoices } from '../../../models/invoice.model';
       </td>
       <td class="right"
         [class.overdue]="!invoice.invoicePaid && today > invoice.dueDate"
-        [class.paid]="invoice.invoicePaid">{{invoice.invoiceTotal | number}}</td>
+        [class.paid]="invoice.invoicePaid">{{invoice.invoiceTotal | currency: 'USD' : 'symbol' : '2.0-0'}}</td>
       <td *ngIf="clientId === null && showLinks" class="right mobileHide"><a [routerLink]="['/invoicetracker/invoices', invoice.id]">add/edit tasks</a></td>      
     </tr>
     <tr [ngClass]="animateOnRouteEnter" class="nohover" *ngIf="invoices.length !== 0">
@@ -62,7 +62,7 @@ import { Invoice, Invoices } from '../../../models/invoice.model';
       <td *ngIf="clientId !== null" colspan="2">&nbsp;</td>
       <td *ngIf="clientId !== null" class="mobileHide">&nbsp;</td>
       <td class="mobileHide" *ngIf="clientId === null" colspan="2">&nbsp;</td>      
-      <td class="right strong table-totals">{{sumTotal | number}}</td>
+      <td class="right strong table-totals">{{sumTotal | currency: 'USD' : 'symbol' : '2.0-0'}}</td>
       <td class="mobileHide" *ngIf="clientId === null && showLinks" >&nbsp;</td>
     </tr>
     </tbody>

@@ -39,13 +39,13 @@ import { Tasks } from '../../../models/task.model';
       <td *ngIf="clientId === null"><a [routerLink]="['/invoicetracker/clients', task.clientId]">{{task.client.clientName}}</a></td>
       <td class="mobileSmall">{{task.taskDescription}}</td>
       <td class="right mobileHide">{{task.hours | number}}</td>
-      <td class="right">{{task.total | number}}</td>
+      <td class="right">{{task.total | currency: 'USD' : 'symbol' : '2.0-0'}}</td>
     </tr>
     <tr [ngClass]="animateOnRouteEnter" class="nohover" *ngIf="tasks.length !== 0">
       <td *ngIf="clientId === null" colspan="3">&nbsp;</td>
       <td *ngIf="clientId !== null" colspan="2">&nbsp;</td>
       <td class="right mobileHide strong table-totals">{{taskTotals.sumHours | number}}</td>
-      <td class="right strong table-totals">{{taskTotals.sumTotal | number}}</td>
+      <td class="right strong table-totals">{{taskTotals.sumTotal | currency: 'USD' : 'symbol' : '2.0-0'}}</td>
     </tr>
     </tbody>
     </table>

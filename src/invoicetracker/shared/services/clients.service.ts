@@ -58,17 +58,27 @@ export class ClientsService {
       this.store.select(fromStore.getShowArchived),
       this.store.select(fromStore.getAllInvoices),
       (clients: any[], showArchived: any, invoices: any[]) => {
-        return clients
-          .map(client => {
+        if (!showArchived) {
+          return clients
+            .map(client => {
+              let clientInvoices: Invoice[] = invoices.filter(
+                invoice => invoice.clientId === client.id
+              );
+
+              return { ...client, invoices: clientInvoices };
+            })
+            .filter(
+              client => client.active === !showArchived //? true || false : !showArchived
+            );
+        } else {
+          return clients.map(client => {
             let clientInvoices: Invoice[] = invoices.filter(
               invoice => invoice.clientId === client.id
             );
 
             return { ...client, invoices: clientInvoices };
-          })
-          .filter(
-            client => client.active === !showArchived //? true || false : !showArchived
-          );
+          });
+        }
       }
     ));
   }
